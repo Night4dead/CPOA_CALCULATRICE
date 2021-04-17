@@ -78,6 +78,11 @@ public class TestMaths {
         Assert.assertEquals(maths.soustraction(2,0),2);
     }
 
+    @Test
+    public void testSoustractionCas0Negatif(){
+        Assert.assertEquals(maths.soustraction(-2,0),-2);
+    }
+
 
     //MULTIPLICATIONS
 
@@ -104,6 +109,11 @@ public class TestMaths {
     @Test
     public void testMultiplicationCas0(){
         Assert.assertEquals(maths.multiplication(3,0),0);
+    }
+
+    @Test
+    public void testMultiplicationCas0Negatif(){
+        Assert.assertEquals(maths.multiplication(-3,0),0);
     }
 
 
@@ -145,7 +155,25 @@ public class TestMaths {
     }
 
     @Test
-    public void testDivisionCas0() throws MathsException {
+    public void testDivisionCas0Negatif() {
+        try{
+            Assert.assertEquals(maths.division(0,-2),0,10);
+        } catch(Exception e){
+            System.out.println("Error");
+        }
+    }
+
+    @Test
+    public void testDivisionCas0Positif() {
+        try{
+            Assert.assertEquals(maths.division(0,2),0,10);
+        } catch(Exception e){
+            System.out.println("Error");
+        }
+    }
+
+    @Test
+    public void testDivisionCasPar0() throws MathsException {
         e.expect(MathsException.class);
         e.expectMessage("Division par zéro interdite");
         maths.division(1,0);
