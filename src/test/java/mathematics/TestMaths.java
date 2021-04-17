@@ -46,6 +46,11 @@ public class TestMaths {
         Assert.assertEquals(maths.addition(3,0),3);
     }
 
+    @Test
+    public void testAdditionCas0Negatif(){
+        Assert.assertEquals(maths.addition(-3,0),-3);
+    }
+
 
     //SOUSTRACTIONS
     @Test
