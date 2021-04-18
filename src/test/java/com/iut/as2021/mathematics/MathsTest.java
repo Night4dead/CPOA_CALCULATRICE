@@ -20,7 +20,7 @@ public class MathsTest {
 	public void setUp() {
 		this.maths = new Maths();
 		this.mathsMock = Mockito.mock(Maths.class);
-		Mockito.when(mathsMock.addition(anyInt(), anyInt())).thenReturn(Integer.valueOf(7));
+		Mockito.when(mathsMock.addition(anyInt(), anyInt())).thenReturn(Double.valueOf(7));
 	}
 
 	@Test

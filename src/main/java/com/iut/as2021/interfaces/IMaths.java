@@ -4,11 +4,11 @@ import com.iut.as2021.exceptions.MathsExceptions;
 
 public interface IMaths {
 
-	int addition(int a, int b);
+	double addition(double a, double b);
 
-	int soustraction(int a, int b);
+	double soustraction(double a, double b);
 
-	int multiplication(int a, int b);
+	double multiplication(double a, double b);
 
-	double division(int a, int b) throws MathsExceptions;
+	double division(double a, double b) throws MathsExceptions;
 }
