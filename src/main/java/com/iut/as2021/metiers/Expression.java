@@ -37,8 +37,52 @@ public class Expression {
         tools = new Tools();
         this.expression = expression.trim();
         int posOpeAdd, posOpeSous, posOpeMult, posOpeDiv,posOpe=-1,posParOp;
+        int cmptOpenPar=0;
+        boolean start=false, operator=false;
+        System.out.println(this.expression);
+        if(this.expression.charAt(0)=='(' && this.expression.charAt(this.expression.length()-1)==')'){
+            this.expression = this.expression.substring(1,this.expression.length()-1);
+        }
 
-        posOpeAdd=this.expression.lastIndexOf("+");
+
+        if((posParOp=this.expression.indexOf('('))==0){
+            for (int i=0; i<this.expression.length(); i++) {
+                if(!start && this.expression.charAt(i)=='('){
+                    cmptOpenPar++;
+                    start=true;
+                } else if(start && this.expression.charAt(i)==')'){
+                    cmptOpenPar--;
+                    if(start && cmptOpenPar==0 && i!=this.expression.length()-1){
+                        this.leftExpression = new Expression(tools.getLeftElement(this.expression,i+1));
+                        switch(this.expression.charAt(i+1)){
+                            case '+':
+                                this.ope = ADDITION;
+                                operator = true;
+                                break;
+                            case '-':
+                                this.ope = SOUSTRACTION;
+                                operator = true;
+                                break;
+                            case '*':
+                                this.ope = MULTIPLICATION;
+                                operator = true;
+                                break;
+                            case '/':
+                                this.ope = DIVISION;
+                                operator = true;
+                                break;
+                            default:
+                                this.ope = MULTIPLICATION;
+                                break;
+                        }
+                        System.out.println(this.ope);
+                        this.rightExpression =  new Expression(tools.getRightElement(this.expression,i+1));
+                        System.out.println("left : "+this.leftExpression + ", right : "+this.rightExpression);
+                    }
+                }
+            }
+        } else {
+            posOpeAdd=this.expression.lastIndexOf("+");
             posOpeSous=this.expression.lastIndexOf("-");
             posOpeMult=this.expression.lastIndexOf("*");
             posOpeDiv=this.expression.lastIndexOf("/");
@@ -63,6 +107,37 @@ public class Expression {
                 this.leftExpression = new Expression(tools.getLeftElement(this.expression,posOpe));
                 this.rightExpression = new Expression(tools.getRightElement(this.expression,posOpe));
             }
+
+        }
+        System.out.println(this);
+
+
+        /*
+        posOpeAdd=this.expression.lastIndexOf("+");
+            posOpeSous=this.expression.lastIndexOf("-");
+            posOpeMult=this.expression.lastIndexOf("*");
+            posOpeDiv=this.expression.lastIndexOf("/");
+
+            if((posOpeAdd>0 && posOpeAdd>posOpeSous && posOpeAdd>posOpeMult && posOpeAdd>posOpeDiv)){
+                posOpe = posOpeAdd;
+                this.ope = ADDITION;
+            } else if((posOpeSous>0&& posOpeSous>posOpeAdd && posOpeSous>posOpeMult && posOpeSous>posOpeDiv)){
+                posOpe = posOpeSous;
+                this.ope = SOUSTRACTION;
+            } else if((posOpeMult>0 && posOpeMult>posOpeAdd && posOpeMult>posOpeSous && posOpeMult>posOpeDiv)){
+                posOpe = posOpeMult;
+                this.ope = MULTIPLICATION;
+            } else if ((posOpeDiv>0 && posOpeDiv>posOpeAdd && posOpeDiv>posOpeMult && posOpeDiv>posOpeSous)){
+                posOpe = posOpeDiv;
+                this.ope = DIVISION;
+            } else{
+                this.ope = INCONNUE;
+            }
+
+            if(this.ope!=INCONNUE){
+                this.leftExpression = new Expression(tools.getLeftElement(this.expression,posOpe));
+                this.rightExpression = new Expression(tools.getRightElement(this.expression,posOpe));
+            }*/
     }
 
     public double calculate() throws MathsExceptions{

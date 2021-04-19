@@ -8,7 +8,7 @@ import com.iut.as2021.metiers.Expression;
 public class StartTestMaths {
 
 	public static void main(String[] args) {
-		Expression exp = new Expression("10+2-6+10");
+		Expression exp = new Expression("(10+2)-6+10");
 		try {
 			//System.out.println(exp+", left element : "+exp.getLeftExpression()+", right element : "+exp.getRightExpression().getExpression()+", ope : "+exp.getOpe());
 			System.out.println(exp.getValue());
