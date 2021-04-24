@@ -33,7 +33,25 @@ public class Expression {
         return res;
     }
 
+    public Expression(String exp) throws MathsExceptions{
+        if (exp == null || exp.isEmpty()){
+            throw new MathsExceptions("l'expression est vide");
+        }
 
+        maths = new Maths();
+        tools = new Tools();
+
+        this.expression = tools.trimParenthesis(exp);
+
+        for (int i=this.expression.length()-1;i>0;i--){
+
+        }
+
+
+    }
+
+
+    /*
     public Expression(String expression) throws MathsExceptions{
         if (expression == null || expression.isEmpty()){
             throw new MathsExceptions("L'expression est vide");
@@ -126,6 +144,7 @@ public class Expression {
         }
         System.out.println("left : "+this.getLeftExpression()+", right : "+this.getRightExpression());
     }
+    */
 
     public double calculate() throws MathsExceptions{
         double res=0;

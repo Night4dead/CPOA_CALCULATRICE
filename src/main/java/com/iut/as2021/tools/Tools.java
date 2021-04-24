@@ -32,4 +32,14 @@ public class Tools {
 
         return count;
     }
+
+    public String trimParenthesis(String expression){
+        String res=expression;
+
+        if (countNbParenthesis(res)==1 && res.lastIndexOf('(')==0 && res.lastIndexOf(')')==res.length() ){
+            res=res.substring(1,res.length()-1);
+        }
+
+        return res;
+    }
 }
