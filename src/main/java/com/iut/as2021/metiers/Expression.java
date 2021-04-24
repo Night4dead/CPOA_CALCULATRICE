@@ -36,33 +36,33 @@ public class Expression {
         maths = new Maths();
         tools = new Tools();
         this.expression = expression.trim();
-        int posOpeAdd, posOpeSous, posOpeMult, posOpeDiv,posOpe=-1,posParOp;
+        int posOpeAdd, posOpeSous, posOpeMult, posOpeDiv,posOpe=-1;
 
         posOpeAdd=this.expression.lastIndexOf("+");
-            posOpeSous=this.expression.lastIndexOf("-");
-            posOpeMult=this.expression.lastIndexOf("*");
-            posOpeDiv=this.expression.lastIndexOf("/");
+        posOpeSous=this.expression.lastIndexOf("-");
+        posOpeMult=this.expression.lastIndexOf("*");
+        posOpeDiv=this.expression.lastIndexOf("/");
 
-            if((posOpeAdd>0 && posOpeAdd>posOpeSous && posOpeAdd>posOpeMult && posOpeAdd>posOpeDiv)){
-                posOpe = posOpeAdd;
-                this.ope = ADDITION;
-            } else if((posOpeSous>0&& posOpeSous>posOpeAdd && posOpeSous>posOpeMult && posOpeSous>posOpeDiv)){
-                posOpe = posOpeSous;
-                this.ope = SOUSTRACTION;
-            } else if((posOpeMult>0 && posOpeMult>posOpeAdd && posOpeMult>posOpeSous && posOpeMult>posOpeDiv)){
-                posOpe = posOpeMult;
-                this.ope = MULTIPLICATION;
-            } else if ((posOpeDiv>0 && posOpeDiv>posOpeAdd && posOpeDiv>posOpeMult && posOpeDiv>posOpeSous)){
-                posOpe = posOpeDiv;
-                this.ope = DIVISION;
-            } else{
-                this.ope = INCONNUE;
-            }
+        if((posOpeAdd>0 && posOpeAdd>posOpeSous && posOpeAdd>posOpeMult && posOpeAdd>posOpeDiv)){
+            posOpe = posOpeAdd;
+            this.ope = ADDITION;
+        } else if((posOpeSous>0&& posOpeSous>posOpeAdd && posOpeSous>posOpeMult && posOpeSous>posOpeDiv)){
+            posOpe = posOpeSous;
+            this.ope = SOUSTRACTION;
+        } else if((posOpeMult>0 && posOpeMult>posOpeAdd && posOpeMult>posOpeSous && posOpeMult>posOpeDiv)){
+            posOpe = posOpeMult;
+            this.ope = MULTIPLICATION;
+        } else if ((posOpeDiv>0 && posOpeDiv>posOpeAdd && posOpeDiv>posOpeMult && posOpeDiv>posOpeSous)){
+            posOpe = posOpeDiv;
+            this.ope = DIVISION;
+        } else{
+            this.ope = INCONNUE;
+        }
 
-            if(this.ope!=INCONNUE){
-                this.leftExpression = new Expression(tools.getLeftElement(this.expression,posOpe));
-                this.rightExpression = new Expression(tools.getRightElement(this.expression,posOpe));
-            }
+        if(this.ope!=INCONNUE){
+            this.leftExpression = new Expression(tools.getLeftElement(this.expression,posOpe));
+            this.rightExpression = new Expression(tools.getRightElement(this.expression,posOpe));
+        }
     }
 
     public double calculate() throws MathsExceptions{
