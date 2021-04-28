@@ -1,13 +1,17 @@
 package com.iut.as2021.metiers;
 
 import com.iut.as2021.exceptions.MathsExceptions;
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 public class ExpressionTest {
 
     private Expression resultat;
+
+    @Rule
+    public ExpectedException e = ExpectedException.none();
 
     @Test
     public void testExpressionSimpleAdditionWithoutP() throws MathsExceptions {
@@ -167,5 +171,26 @@ public class ExpressionTest {
     public void testExpressionWithNegative5() throws MathsExceptions{
         resultat = new Expression("-1+-2");
         Assert.assertEquals(resultat.calculate(),-3,2);
+    }
+
+    @Test
+    public void testExpressionBy0() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("Division par zero impossible");
+        resultat = new Expression("1/0");
+        Assert.assertEquals(resultat.calculate(),1,2);
+    }
+
+    @Test
+    public void testExpressionEmpty() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression est vide");
+        resultat = new Expression("");
+    }
+    @Test
+    public void testExpressionEmptyRight() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression est vide");
+        resultat = new Expression("3+");
     }
 }
