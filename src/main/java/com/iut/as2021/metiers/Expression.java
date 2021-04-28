@@ -11,7 +11,6 @@ import com.iut.as2021.exceptions.MathsExceptions;
 import com.iut.as2021.interfaces.IMaths;
 import com.iut.as2021.mathematics.Maths;
 import com.iut.as2021.tools.Tools;
-import com.sun.org.apache.xpath.internal.operations.Div;
 
 public class Expression {
     private Operation ope;
@@ -37,114 +36,73 @@ public class Expression {
         if (exp == null || exp.isEmpty()){
             throw new MathsExceptions("l'expression est vide");
         }
-
-        maths = new Maths();
+        this.ope=INCONNUE;
         tools = new Tools();
-
         this.expression = tools.trimParenthesis(exp);
-
-        for (int i=this.expression.length()-1;i>0;i--){
-
-        }
-
-
-    }
-
-
-    /*
-    public Expression(String expression) throws MathsExceptions{
-        if (expression == null || expression.isEmpty()){
-            throw new MathsExceptions("L'expression est vide");
-        }
+        assignLeftRightExpressions();
         maths = new Maths();
-        tools = new Tools();
-        this.expression = expression.trim();
-        int posOpeAdd, posOpeSous, posOpeMult, posOpeDiv,posOpe=-1,posParOp;
-        int cmptOpenPar=0;
-        boolean start=false, operator=false;
-
-
-        if(tools.countNbParenthesis(this.expression)==1 && this.expression.charAt(0)=='(' && this.expression.charAt(this.expression.length()-1)==')'){
-            this.expression = this.expression.substring(1,this.expression.length()-1);
-        }
-
-
-        if((posParOp=this.expression.lastIndexOf(')'))==this.expression.length()-1){
-            for (int i=this.expression.length()-1; i>0; i--) {
-                if(this.expression.charAt(i)==')'){
-                    cmptOpenPar++;
-                    start= (start ? start : !start);
-                } else if(this.expression.charAt(i)=='('){
-                    cmptOpenPar--;
-                }
-                if(i!=0 && cmptOpenPar ==0 && start){
-                    switch (this.expression.charAt(i-1)){
-                        case '+':
-                            this.ope = ADDITION;
-                            posOpe = i-1;
-                            break;
-                        case '-':
-                            this.ope = SOUSTRACTION;
-                            posOpe = i-1;
-                            break;
-                        case '*':
-                            this.ope = MULTIPLICATION;
-                            posOpe = i-1;
-                            break;
-                        case '/':
-                            this.ope = DIVISION;
-                            posOpe = i-1;
-                            break;
-                        default:
-                            if(i!=0){
-                                this.ope = MULTIPLICATION;
-                                posOpe = -1;
-                            } else {
-                                this.ope = INCONNUE;
-                            }
-                            break;
-                    }
-                    if(posOpe!=-1){
-                        this.rightExpression =  new Expression(tools.getRightElement(this.expression,i-1));
-                        this.leftExpression = new Expression(tools.getLeftElement(this.expression,i-1));
-                    } else {
-                        this.rightExpression =  new Expression(tools.getRightElement(this.expression,i-1));
-                        this.leftExpression = new Expression(tools.getLeftElement(this.expression,i));
-                    }
-                    break;
-                }
-            }
-        } else {
-            posOpeAdd=this.expression.lastIndexOf("+");
-            posOpeSous=this.expression.lastIndexOf("-");
-            posOpeMult=this.expression.lastIndexOf("*");
-            posOpeDiv=this.expression.lastIndexOf("/");
-
-            if((posOpeAdd>0 && posOpeAdd>posOpeSous && posOpeAdd>posOpeMult && posOpeAdd>posOpeDiv)){
-                posOpe = posOpeAdd;
-                this.ope = ADDITION;
-            } else if((posOpeSous>0&& posOpeSous>posOpeAdd && posOpeSous>posOpeMult && posOpeSous>posOpeDiv)){
-                posOpe = posOpeSous;
-                this.ope = SOUSTRACTION;
-            } else if((posOpeMult>0 && posOpeMult>posOpeAdd && posOpeMult>posOpeSous && posOpeMult>posOpeDiv)){
-                posOpe = posOpeMult;
-                this.ope = MULTIPLICATION;
-            } else if ((posOpeDiv>0 && posOpeDiv>posOpeAdd && posOpeDiv>posOpeMult && posOpeDiv>posOpeSous)){
-                posOpe = posOpeDiv;
-                this.ope = DIVISION;
-            } else{
-                this.ope = INCONNUE;
-            }
-
-            if(this.ope!=INCONNUE){
-                this.leftExpression = new Expression(tools.getLeftElement(this.expression,posOpe));
-                this.rightExpression = new Expression(tools.getRightElement(this.expression,posOpe));
-            }
-
-        }
-        System.out.println("left : "+this.getLeftExpression()+", right : "+this.getRightExpression());
     }
-    */
+
+    private void assignLeftRightExpressions()throws MathsExceptions{
+        int pos = getPosition();
+        if(!INCONNUE.equals(ope)){
+            if(pos<0 && MULTIPLICATION.equals(ope)){
+                leftExpression= new Expression(tools.getLeftElement(this.expression,(-pos)+1));
+                rightExpression= new Expression(tools.getRightElement(this.expression,-pos));
+            } else {
+                leftExpression= new Expression(tools.getLeftElement(this.expression,pos));
+                rightExpression= new Expression(tools.getRightElement(this.expression,pos));
+            }
+
+        }
+    }
+
+    private int getPosition() {
+        int pos=0,count=0;
+        for(int i=this.expression.length()-1;i>-1;i--){
+            if(this.expression.charAt(i)==')' && count==0){
+                count++;
+            } else if(this.expression.charAt(i)==')'){
+                count++;
+            }
+            if(i<this.expression.length()-2 && this.expression.charAt(i)==')' && this.expression.charAt(i+1)=='('){
+                pos=-i;
+                this.ope=MULTIPLICATION;
+            }
+            if (this.expression.charAt(i)=='('){
+                count--;
+            }
+            if(i>0 && !(this.expression.charAt(i)=='-' && (isOperator(this.expression.charAt(i-1))||this.expression.charAt(i-1)=='('))){
+                if(isOperator(this.expression.charAt(i)) && count==0 && ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION ) ){
+                    pos=i;
+                    switchOpe(this.expression.charAt(i));
+                }
+            }
+        }
+        return pos;
+    }
+
+    private void switchOpe(char c){
+        switch(c){
+            case '+':
+                this.ope = ADDITION;
+                break;
+            case '-':
+                this.ope = SOUSTRACTION;
+                break;
+            case '*':
+                this.ope = MULTIPLICATION;
+                break;
+            case '/':
+                this.ope = DIVISION;
+                break;
+        }
+    }
+
+    private boolean isOperator(char c){
+        if(c=='+'||c=='-'||c=='*'||c=='/') return true;
+        return false;
+    }
 
     public double calculate() throws MathsExceptions{
         double res=0;
@@ -171,16 +129,8 @@ public class Expression {
         return leftExpression;
     }
 
-    public void setLeftExpression(Expression leftExpression) {
-        this.leftExpression = leftExpression;
-    }
-
     public Expression getRightExpression() {
         return rightExpression;
-    }
-
-    public void setRightExpression(Expression rightExpression) {
-        this.rightExpression = rightExpression;
     }
 
     public Operation getOpe(){

@@ -15,6 +15,11 @@ public class ExpressionTest {
         Assert.assertEquals(resultat.calculate(), 18, 2);
     }
     @Test
+    public void testExpressionSimpleAdditionWithNegative() throws MathsExceptions {
+        resultat = new Expression("-4+5+6");
+        Assert.assertEquals(resultat.calculate(), 7, 2);
+    }
+    @Test
     public void testExpressionSimpleAdditionWithOneP() throws MathsExceptions {
         resultat = new Expression("(3+4)+5+6");
         Assert.assertEquals(resultat.calculate(), 18, 2);
@@ -67,6 +72,21 @@ public class ExpressionTest {
         Assert.assertEquals(resultat.calculate(), 126, 2);
     }
     @Test
+    public void testExpressionSimpleMultiplicationWithPWithoutOpe2() throws MathsExceptions {
+        resultat = new Expression("(7*3)(5+1)*5");
+        Assert.assertEquals(resultat.calculate(), 630, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationWithPWithoutOpe3() throws MathsExceptions {
+        resultat = new Expression("(7*3)(5+1)(1+2)");
+        Assert.assertEquals(resultat.calculate(), 378, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationWithPWithoutOpe4() throws MathsExceptions {
+        resultat = new Expression("(7*3)((5+1)(1+1))");
+        Assert.assertEquals(resultat.calculate(), 252, 2);
+    }
+    @Test
     public void testExpressionSimpleMultiplicationWithTwoP() throws MathsExceptions {
         resultat = new Expression("(7+1)*(3+1)");
         Assert.assertEquals(resultat.calculate(), 32, 2);
@@ -96,5 +116,56 @@ public class ExpressionTest {
     public void testExpressionComplexeFull() throws MathsExceptions {
         resultat = new Expression("((6+3)+(4+5-2))/1");
         Assert.assertEquals(resultat.calculate(),16,2);
+    }
+    @Test
+    public void testExpressionComplexeFull2() throws MathsExceptions {
+        resultat = new Expression("(-1+2)-(1*3)*(3+1)");
+        Assert.assertEquals(resultat.calculate(),-9,2);
+    }
+    @Test
+    public void testExpressionComplexeFull3() throws MathsExceptions {
+        resultat = new Expression("(5+(2*1)+(3*1))/((5*2)-(2+3))");
+        Assert.assertEquals(resultat.calculate(),2,2);
+    }
+    @Test
+    public void testExpressionComplexeFull4() throws MathsExceptions {
+        resultat = new Expression("(((((6+3)+(4+5-2))/1)))");
+        Assert.assertEquals(resultat.calculate(),16,2);
+    }
+    @Test
+    public void testExpressionComplexeFull5() throws MathsExceptions {
+        resultat = new Expression("((6+3)+(((4+5-2))))/(1)");
+        Assert.assertEquals(resultat.calculate(),16,2);
+    }
+    @Test
+    public void testExpressionComplexeFull6() throws MathsExceptions {
+        resultat = new Expression("(((((6+3))))+(4+5-2))/1");
+        Assert.assertEquals(resultat.calculate(),16,2);
+    }
+
+    @Test
+    public void testExpressionWithNegative() throws MathsExceptions{
+        resultat = new Expression("-1+2");
+        Assert.assertEquals(resultat.calculate(),1,2);
+    }
+    @Test
+    public void testExpressionWithNegative2() throws MathsExceptions{
+        resultat = new Expression("1+-1+2");
+        Assert.assertEquals(resultat.calculate(),2,2);
+    }
+    @Test
+    public void testExpressionWithNegative3() throws MathsExceptions{
+        resultat = new Expression("1+(-1+2)");
+        Assert.assertEquals(resultat.calculate(),2,2);
+    }
+    @Test
+    public void testExpressionWithNegative4() throws MathsExceptions{
+        resultat = new Expression("(-1--2)");
+        Assert.assertEquals(resultat.calculate(),1,2);
+    }
+    @Test
+    public void testExpressionWithNegative5() throws MathsExceptions{
+        resultat = new Expression("-1+-2");
+        Assert.assertEquals(resultat.calculate(),-3,2);
     }
 }
