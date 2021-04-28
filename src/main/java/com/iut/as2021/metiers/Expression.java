@@ -32,37 +32,76 @@ public class Expression {
         return res;
     }
 
-    public Expression(String expression){
-        maths = new Maths();
+    public Expression(String exp) throws MathsExceptions{
+        if (exp == null || exp.isEmpty()){
+            throw new MathsExceptions("l'expression est vide");
+        }
+        this.ope=INCONNUE;
         tools = new Tools();
-        this.expression = expression.trim();
-        int posOpeAdd, posOpeSous, posOpeMult, posOpeDiv,posOpe=-1;
+        this.expression = tools.trimParenthesis(exp);
+        assignLeftRightExpressions();
+        maths = new Maths();
+    }
 
-        posOpeAdd=this.expression.lastIndexOf("+");
-        posOpeSous=this.expression.lastIndexOf("-");
-        posOpeMult=this.expression.lastIndexOf("*");
-        posOpeDiv=this.expression.lastIndexOf("/");
+    private void assignLeftRightExpressions()throws MathsExceptions{
+        int pos = getPosition();
+        if(!INCONNUE.equals(ope)){
+            if(pos<0 && MULTIPLICATION.equals(ope)){
+                leftExpression= new Expression(tools.getLeftElement(this.expression,(-pos)+1));
+                rightExpression= new Expression(tools.getRightElement(this.expression,-pos));
+            } else {
+                leftExpression= new Expression(tools.getLeftElement(this.expression,pos));
+                rightExpression= new Expression(tools.getRightElement(this.expression,pos));
+            }
 
-        if((posOpeAdd>0 && posOpeAdd>posOpeSous && posOpeAdd>posOpeMult && posOpeAdd>posOpeDiv)){
-            posOpe = posOpeAdd;
-            this.ope = ADDITION;
-        } else if((posOpeSous>0&& posOpeSous>posOpeAdd && posOpeSous>posOpeMult && posOpeSous>posOpeDiv)){
-            posOpe = posOpeSous;
-            this.ope = SOUSTRACTION;
-        } else if((posOpeMult>0 && posOpeMult>posOpeAdd && posOpeMult>posOpeSous && posOpeMult>posOpeDiv)){
-            posOpe = posOpeMult;
-            this.ope = MULTIPLICATION;
-        } else if ((posOpeDiv>0 && posOpeDiv>posOpeAdd && posOpeDiv>posOpeMult && posOpeDiv>posOpeSous)){
-            posOpe = posOpeDiv;
-            this.ope = DIVISION;
-        } else{
-            this.ope = INCONNUE;
         }
+    }
 
-        if(this.ope!=INCONNUE){
-            this.leftExpression = new Expression(tools.getLeftElement(this.expression,posOpe));
-            this.rightExpression = new Expression(tools.getRightElement(this.expression,posOpe));
+    private int getPosition() {
+        int pos=0,count=0;
+        for(int i=this.expression.length()-1;i>-1;i--){
+            if(this.expression.charAt(i)==')' && count==0){
+                count++;
+            } else if(this.expression.charAt(i)==')'){
+                count++;
+            }
+            if(i<this.expression.length()-2 && this.expression.charAt(i)==')' && this.expression.charAt(i+1)=='('){
+                pos=-i;
+                this.ope=MULTIPLICATION;
+            }
+            if (this.expression.charAt(i)=='('){
+                count--;
+            }
+            if(i>0 && !(this.expression.charAt(i)=='-' && (isOperator(this.expression.charAt(i-1))||this.expression.charAt(i-1)=='('))){
+                if(isOperator(this.expression.charAt(i)) && count==0 && ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION ) ){
+                    pos=i;
+                    switchOpe(this.expression.charAt(i));
+                }
+            }
         }
+        return pos;
+    }
+
+    private void switchOpe(char c){
+        switch(c){
+            case '+':
+                this.ope = ADDITION;
+                break;
+            case '-':
+                this.ope = SOUSTRACTION;
+                break;
+            case '*':
+                this.ope = MULTIPLICATION;
+                break;
+            case '/':
+                this.ope = DIVISION;
+                break;
+        }
+    }
+
+    private boolean isOperator(char c){
+        if(c=='+'||c=='-'||c=='*'||c=='/') return true;
+        return false;
     }
 
     public double calculate() throws MathsExceptions{
@@ -90,16 +129,8 @@ public class Expression {
         return leftExpression;
     }
 
-    public void setLeftExpression(Expression leftExpression) {
-        this.leftExpression = leftExpression;
-    }
-
     public Expression getRightExpression() {
         return rightExpression;
-    }
-
-    public void setRightExpression(Expression rightExpression) {
-        this.rightExpression = rightExpression;
     }
 
     public Operation getOpe(){
