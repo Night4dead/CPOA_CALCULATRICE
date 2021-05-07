@@ -4,7 +4,19 @@ import com.iut.as2021.metiers.Expression;
 
 import java.util.List;
 
-public class MySqlDAO implements IDAOExpression{
+public class MySqlExpressionDAO implements IDAOExpression{
+
+    private static MySqlExpressionDAO instance;
+
+    private MySqlExpressionDAO(){}
+
+    public static MySqlExpressionDAO getDAOInstance(){
+        if(instance == null){
+            instance = new MySqlExpressionDAO();
+        }
+        return instance;
+    }
+
     @Override
     public Expression readById(int i) {
         return null;
