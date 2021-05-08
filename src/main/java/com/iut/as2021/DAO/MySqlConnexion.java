@@ -39,7 +39,7 @@ public class MySqlConnexion {
         try {
             FileInputStream source = new FileInputStream(file);
             p.loadFromXML(source);
-            this.url="jdbc:mysql://"+p.getProperty("url")+":"+p.getProperty("bdd");
+            this.url="jdbc:mysql://"+p.getProperty("url")+":"+p.getProperty("port")+"/"+p.getProperty("bdd");
             this.login = p.getProperty("login");
             this.pwd = p.getProperty("pass");
         } catch (IOException ioe){

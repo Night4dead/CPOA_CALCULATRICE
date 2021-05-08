@@ -5,6 +5,7 @@ import com.iut.as2021.metiers.Expression;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 public class MySqlExpressionDAO implements IDAOExpression{
@@ -70,7 +71,6 @@ public class MySqlExpressionDAO implements IDAOExpression{
         requete.setInt(object.getId(),2);
 
         int nbLignes = requete.executeUpdate();
-
         return nbLignes==1;
     }
 
@@ -80,7 +80,7 @@ public class MySqlExpressionDAO implements IDAOExpression{
 
         Connection co = MySqlConnexion.getInstance().getSqlConnexion();
 
-        PreparedStatement requete = co.prepareStatement(sql);
+        PreparedStatement requete = co.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         requete.setString(1,object.getExpression());
 
         int nbLignes = requete.executeUpdate();

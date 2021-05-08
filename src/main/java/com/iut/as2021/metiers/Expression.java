@@ -105,7 +105,7 @@ public class Expression {
         return false;
     }
 
-    public double calculate() throws MathsExceptions{
+    private double calculate() throws MathsExceptions{
         double res=0;
         switch (ope){
             case INCONNUE:
