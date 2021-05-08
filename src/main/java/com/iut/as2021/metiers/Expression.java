@@ -36,9 +36,9 @@ public class Expression {
         if (exp == null || exp.isEmpty()){
             throw new MathsExceptions("l'expression est vide");
         }
-        this.ope=INCONNUE;
         tools = new Tools();
         this.expression = tools.trimParenthesis(exp);
+        this.ope=INCONNUE;
         assignLeftRightExpressions();
         maths = new Maths();
     }

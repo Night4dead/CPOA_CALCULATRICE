@@ -193,4 +193,10 @@ public class ExpressionTest {
         e.expectMessage("l'expression est vide");
         resultat = new Expression("3+");
     }
+    @Test
+    public void testExpressionEmptyParenthesis() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression est vide");
+        resultat = new Expression("3+()");
+    }
 }
