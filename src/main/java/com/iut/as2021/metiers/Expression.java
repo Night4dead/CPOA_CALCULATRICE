@@ -18,6 +18,7 @@ public class Expression {
     private Tools tools;
 
     private String expression;
+    private int id;
 
     private Expression leftExpression;
     private Expression rightExpression;
@@ -144,5 +145,13 @@ public class Expression {
     @Override
     public String toString(){
         return this.expression;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
