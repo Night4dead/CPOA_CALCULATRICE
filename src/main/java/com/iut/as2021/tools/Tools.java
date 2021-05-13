@@ -1,5 +1,7 @@
 package com.iut.as2021.tools;
 
+import com.iut.as2021.exceptions.MathsExceptions;
+
 public class Tools {
     public String getRightElement(String expression, int signe) {
         return expression.substring(signe+1).trim();
@@ -9,12 +11,15 @@ public class Tools {
         return expression.substring(0, signe).trim();
     }
 
-    public int countNbParenthesis(String expression){
+    public int countNbParenthesis(String expression) throws MathsExceptions {
         int count = 0;
         boolean first=false;
         int cmptOpen=0;
         if(expression.charAt(0)==')'||expression.charAt(expression.length()-1)=='('){
-            return -1;
+            throw new MathsExceptions("expression mal paranthésée");
+        }
+        if (expression.equals("()")){
+            throw new MathsExceptions("expression entre paranthèses vide : '()'");
         }
         for (int i=0;i<expression.length();i++){
             if(expression.charAt(i)=='('){
@@ -36,12 +41,12 @@ public class Tools {
 
         }
         if(cmptOpen!=0){
-            return -1;
+            throw new MathsExceptions("expression mal paranthésée");
         }
         return count;
     }
 
-    public String trimParenthesis(String expression){
+    public String trimParenthesis(String expression) throws MathsExceptions {
         String res=expression;
         while (countNbParenthesis(res)==1 && res.indexOf('(')==0 && res.lastIndexOf(')')==res.length()-1){
             res=res.substring(1,res.length()-1);

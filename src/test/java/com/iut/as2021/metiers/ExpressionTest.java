@@ -196,7 +196,31 @@ public class ExpressionTest {
     @Test
     public void testExpressionEmptyParenthesis() throws MathsExceptions{
         e.expect(MathsExceptions.class);
-        e.expectMessage("l'expression est vide");
+        e.expectMessage("expression entre paranthèses vide : '()'");
         resultat = new Expression("3+()");
+    }
+    @Test
+    public void testExpressionWrongParenthesis() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("expression mal paranthésée");
+        resultat = new Expression("3+)4+3(");
+    }
+    @Test
+    public void testExpressionWrongParenthesis2() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("expression mal paranthésée");
+        resultat = new Expression("(2+1))(2+1");
+    }
+    @Test
+    public void testExpressionWrongParenthesis3() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("expression mal paranthésée");
+        resultat = new Expression("(2+1))");
+    }
+    @Test
+    public void testExpressionWrongParenthesis4() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("expression mal paranthésée");
+        resultat = new Expression(")2+1)");
     }
 }
