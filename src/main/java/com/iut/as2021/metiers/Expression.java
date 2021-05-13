@@ -18,6 +18,7 @@ public class Expression {
     private Tools tools;
 
     private String expression;
+    private int id;
 
     private Expression leftExpression;
     private Expression rightExpression;
@@ -36,9 +37,9 @@ public class Expression {
         if (exp == null || exp.isEmpty()){
             throw new MathsExceptions("l'expression est vide");
         }
-        this.ope=INCONNUE;
         tools = new Tools();
         this.expression = tools.trimParenthesis(exp);
+        this.ope=INCONNUE;
         assignLeftRightExpressions();
         maths = new Maths();
     }
@@ -104,7 +105,7 @@ public class Expression {
         return false;
     }
 
-    public double calculate() throws MathsExceptions{
+    private double calculate() throws MathsExceptions{
         double res=0;
         switch (ope){
             case INCONNUE:
@@ -144,5 +145,13 @@ public class Expression {
     @Override
     public String toString(){
         return this.expression;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
