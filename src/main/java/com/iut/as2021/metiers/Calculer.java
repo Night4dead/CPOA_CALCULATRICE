@@ -10,23 +10,6 @@ public class Calculer {
         maths = new Maths();
     }
 
-
-    public double run(String expression) throws Exception{
-        double res=0;
-        int signe;
-        if((signe=expression.indexOf("+"))>0){
-            res=addition(expression,signe);
-        } else if ((signe=expression.indexOf("-"))>0){
-            res=soustraction(expression,signe);
-        } else if ((signe=expression.indexOf("*"))>0){
-            res=multiplication(expression,signe);
-        } else if ((signe=expression.indexOf("/"))>0){
-            res=division(expression,signe);
-        }
-        return res;
-    }
-
-
     public double addition(String expression,int signe){
         String left = getLeftElement(expression, signe);
         String right = getRightElement(expression, signe);

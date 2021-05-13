@@ -172,6 +172,11 @@ public class ExpressionTest {
         resultat = new Expression("-1+-2");
         Assert.assertEquals(resultat.getValue(),-3,2);
     }
+    @Test
+    public void testExpressionWithNegative6() throws MathsExceptions{
+        resultat = new Expression("(-1+2)+(-3+4)");
+        Assert.assertEquals(resultat.getValue(),2,2);
+    }
 
     @Test
     public void testExpressionBy0() throws MathsExceptions{
