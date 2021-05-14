@@ -228,4 +228,28 @@ public class ExpressionTest {
         e.expectMessage("expression mal paranthésée");
         resultat = new Expression(")2+1)");
     }
+    @Test
+    public void testExpressionAdditionNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a+2");
+    }
+    @Test
+    public void testExpressionMultiplicationNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a*2");
+    }
+    @Test
+    public void testExpressionSoustractionNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a-2");
+    }
+    @Test
+    public void testExpressionDivisionNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a/2");
+    }
 }
