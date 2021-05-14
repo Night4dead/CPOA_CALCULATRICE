@@ -6,6 +6,7 @@ import com.iut.as2021.DAO.IDAOExpression;
 import com.iut.as2021.DAO.MySqlConnexion;
 import com.iut.as2021.exceptions.MathsExceptions;
 import com.iut.as2021.metiers.Expression;
+import com.mysql.cj.log.NullLogger;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
@@ -28,21 +29,11 @@ import java.sql.SQLException;
 @RunWith(MockitoJUnitRunner.class)
 public class DAOFactoryTest {
 
-    @Spy
+    @Mock
     private DAOFactory mockDAOFactory;
 
     @Mock
-    private MySqlConnexion mockMySQLConnexion;
-
-    @Mock
-    private Connection mockConn;
-
-    @Mock
-    private PreparedStatement mockPreparedStatement;
-
-    @Mock
-    private ResultSet mockResultSet;
-    private Expression expression;
+    private Expression mockExpression;
 
     public DAOFactoryTest(){
 
@@ -56,13 +47,16 @@ public class DAOFactoryTest {
 
     @Before
     public void setUp() throws Exception {
-        /*
-        DAOFactory daof = DAOFactory.getDAOFactory(ETypeDAO.MYSQL);
-        mockDAOFactory = spy(daof);
-        when(daof.getDAOExpression().create(anyVararg())).thenReturn(anyBoolean());
-        when(daof.getDAOExpression().update(anyVararg())).thenReturn(anyBoolean());
-        when(daof.getDAOExpression().getLast()).thenReturn(expression);*/
+        /*mockDAOFactory = mock(DAOFactory.class);
+        mockExpression = mock(Expression.class);
 
+        //when(mockDAOFactory.getDAOFactory(ETypeDAO.MYSQL)).thenReturn(mockDAOFactory);
+        when(mockDAOFactory.getDAOExpression().create(mockExpression)).thenReturn(Boolean.TRUE);
+        when(mockDAOFactory.getDAOExpression().update(mockExpression)).thenReturn(Boolean.TRUE);
+        when(mockDAOFactory.getDAOExpression().delete(mockExpression)).thenReturn(Boolean.TRUE);
+        when(mockDAOFactory.getDAOExpression().readById(1)).thenReturn(mockExpression);
+        when(mockDAOFactory.getDAOExpression().getLast()).thenReturn(mockExpression);
+        when(mockDAOFactory.getDAOExpression().getAll()).thenReturn(null);*/
     }
 
     @After
@@ -72,34 +66,15 @@ public class DAOFactoryTest {
 
     @Test
     public void testCreateWithNoExceptions() throws Exception {
-        /*expression = new Expression("1+1");
-        Assert.assertEquals(mockDAOFactory.getDAOExpression().create(expression),true);*/
-
-        /*
-        verify(mockConn,times(1)).prepareStatement(anyString(),anyInt());
-        verify(mockPreparedStatement,times(1)).setString(anyInt(), anyString());
-        verify(mockPreparedStatement,times(1)).execute();
-        verify(mockConn,times(1)).commit();
-        verify(mockResultSet,times(2)).next();
-        verify(mockResultSet,times(1)).getInt(1);*/
+        //Assert.assertEquals(mockDAOFactory.getDAOExpression().create(mockExpression),Boolean.TRUE);
     }
 
     @Test(expected = SQLException.class)
     public void testCreateWithPreparedStatementException() throws Exception{
-        //when(mockConn.prepareStatement(anyString(),anyInt())).thenThrow(new SQLException());
-        /*
-        when(mockDAOFactory.getDAOExpression().create(expression)).thenThrow(new SQLException());
+        /*when(mockDAOFactory.getDAOExpression().create(mockExpression)).thenThrow(new SQLException());
         try {
-            DAOFactory instance = DAOFactory.getDAOFactory(ETypeDAO.MYSQL);
-            expression = new Expression("1+1");
-            instance.getDAOExpression().create(expression);
+            mockDAOFactory.getDAOExpression().create(mockExpression);
         } catch (SQLException se){
-            verify(mockConn,times(1)).prepareStatement(anyString(),anyInt());
-            verify(mockPreparedStatement,times(0)).setString(anyInt(), anyString());
-            verify(mockPreparedStatement,times(0)).execute();
-            verify(mockConn,times(0)).commit();
-            verify(mockResultSet,times(0)).next();
-            verify(mockResultSet,times(0)).getInt(1);
             throw se;
         }*/
     }

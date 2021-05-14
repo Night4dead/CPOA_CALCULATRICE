@@ -1,11 +1,10 @@
 package com.iut.as2021.DAO;
 
+import com.iut.as2021.exceptions.MathsExceptions;
 import com.iut.as2021.metiers.Expression;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlExpressionDAO implements IDAOExpression{
@@ -24,7 +23,7 @@ public class MySqlExpressionDAO implements IDAOExpression{
     public Expression getLast() throws Exception {
         Expression last = null;
 
-        String sql = "select * from historique where date_creat IN (select MAX(date_creat) from historique);";
+        String sql = "select distinct * from historique where date_creat IN (select MAX(date_creat) from historique);";
 
         Connection co = MySqlConnexion.getInstance().getSqlConnexion();
 
@@ -56,8 +55,20 @@ public class MySqlExpressionDAO implements IDAOExpression{
     }
 
     @Override
-    public List<Expression> getAll() {
-        return null;
+    public ArrayList<Expression> getAll() throws Exception {
+        ArrayList<Expression> all = new ArrayList<>();
+
+        String sql = "select distinct * from historique;";
+
+        Connection co = MySqlConnexion.getInstance().getSqlConnexion();
+
+        PreparedStatement requete = co.prepareStatement(sql);
+        ResultSet resSet = requete.executeQuery();
+        while(resSet.next()){
+            all.add(new Expression(resSet.getString("expression")));
+            all.get(all.size()-1).setId(resSet.getInt("id"));
+        }
+        return all;
     }
 
     @Override
