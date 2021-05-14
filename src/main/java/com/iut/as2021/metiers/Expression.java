@@ -58,7 +58,7 @@ public class Expression {
         }
     }
 
-    private int getPosition() {
+    private int getPosition(){
         int pos=0,count=0;
         for(int i=this.expression.length()-1;i>-1;i--){
             if(this.expression.charAt(i)==')' && count==0){

@@ -24,7 +24,7 @@ public class MySqlExpressionDAO implements IDAOExpression{
     public Expression getLast() throws Exception {
         Expression last = null;
 
-        String sql = "select * from historique where id IN (select MAX(id) from historique);";
+        String sql = "select * from historique where date_creat IN (select MAX(date_creat) from historique);";
 
         Connection co = MySqlConnexion.getInstance().getSqlConnexion();
 

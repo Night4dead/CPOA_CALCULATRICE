@@ -172,6 +172,11 @@ public class ExpressionTest {
         resultat = new Expression("-1+-2");
         Assert.assertEquals(resultat.getValue(),-3,2);
     }
+    @Test
+    public void testExpressionWithNegative6() throws MathsExceptions{
+        resultat = new Expression("(-1+2)+(-3+4)");
+        Assert.assertEquals(resultat.getValue(),2,2);
+    }
 
     @Test
     public void testExpressionBy0() throws MathsExceptions{
@@ -222,5 +227,29 @@ public class ExpressionTest {
         e.expect(MathsExceptions.class);
         e.expectMessage("expression mal paranthésée");
         resultat = new Expression(")2+1)");
+    }
+    @Test
+    public void testExpressionAdditionNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a+2");
+    }
+    @Test
+    public void testExpressionMultiplicationNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a*2");
+    }
+    @Test
+    public void testExpressionSoustractionNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a-2");
+    }
+    @Test
+    public void testExpressionDivisionNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des lettres");
+        resultat = new Expression("a/2");
     }
 }
