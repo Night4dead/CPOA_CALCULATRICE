@@ -1,11 +1,9 @@
 package com.iut.as2021.DAO;
 
-import com.iut.as2021.exceptions.MathsExceptions;
 import com.iut.as2021.metiers.Expression;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MySqlExpressionDAO implements IDAOExpression{
 
