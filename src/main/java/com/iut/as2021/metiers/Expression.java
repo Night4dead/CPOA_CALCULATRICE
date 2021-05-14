@@ -73,8 +73,8 @@ public class Expression {
             if (this.expression.charAt(i)=='('){
                 count--;
             }
-            if(i>0 && !(this.expression.charAt(i)=='-' && (isOperator(this.expression.charAt(i-1))||this.expression.charAt(i-1)=='('))){
-                if(isOperator(this.expression.charAt(i)) && count==0 && ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION ) ){
+            if(i>0 && !(this.expression.charAt(i)=='-' && (this.tools.isOperator(this.expression.charAt(i-1))||this.expression.charAt(i-1)=='('))){
+                if(this.tools.isOperator(this.expression.charAt(i)) && count==0 && ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION ) ){
                     pos=i;
                     switchOpe(this.expression.charAt(i));
                 }
@@ -98,11 +98,6 @@ public class Expression {
                 this.ope = DIVISION;
                 break;
         }
-    }
-
-    private boolean isOperator(char c){
-        if(c=='+'||c=='-'||c=='*'||c=='/') return true;
-        return false;
     }
 
     private double calculate() throws MathsExceptions{

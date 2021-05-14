@@ -231,25 +231,31 @@ public class ExpressionTest {
     @Test
     public void testExpressionAdditionNotaNumber() throws MathsExceptions{
         e.expect(MathsExceptions.class);
-        e.expectMessage("l'expression contient des lettres");
+        e.expectMessage("l'expression contient des caractères non-autorisés");
         resultat = new Expression("a+2");
     }
     @Test
     public void testExpressionMultiplicationNotaNumber() throws MathsExceptions{
         e.expect(MathsExceptions.class);
-        e.expectMessage("l'expression contient des lettres");
-        resultat = new Expression("a*2");
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("ba*2");
     }
     @Test
     public void testExpressionSoustractionNotaNumber() throws MathsExceptions{
         e.expect(MathsExceptions.class);
-        e.expectMessage("l'expression contient des lettres");
-        resultat = new Expression("a-2");
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("e-2");
     }
     @Test
     public void testExpressionDivisionNotaNumber() throws MathsExceptions{
         e.expect(MathsExceptions.class);
-        e.expectMessage("l'expression contient des lettres");
-        resultat = new Expression("a/2");
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("!/2");
+    }
+    @Test
+    public void testExpressionDivisionNotaNumber2() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("=/2");
     }
 }
