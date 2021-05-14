@@ -58,12 +58,9 @@ public class Expression {
         }
     }
 
-    private int getPosition() throws MathsExceptions {
+    private int getPosition(){
         int pos=0,count=0;
         for(int i=this.expression.length()-1;i>-1;i--){
-            if(Character.isLetter(this.expression.charAt(i))){
-                throw new MathsExceptions("l'expression contient des lettres");
-            }
             if(this.expression.charAt(i)==')' && count==0){
                 count++;
             } else if(this.expression.charAt(i)==')'){

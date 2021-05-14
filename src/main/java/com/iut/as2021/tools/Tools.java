@@ -22,6 +22,9 @@ public class Tools {
             throw new MathsExceptions("expression entre paranthèses vide : '()'");
         }
         for (int i=0;i<expression.length();i++){
+            if(Character.isLetter(expression.charAt(i))){
+                throw new MathsExceptions("l'expression contient des lettres");
+            }
             if(expression.charAt(i)=='('){
                 cmptOpen++;
                 if(i==0){
