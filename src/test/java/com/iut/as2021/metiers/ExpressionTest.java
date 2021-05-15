@@ -15,7 +15,7 @@ public class ExpressionTest {
 
     @Test
     public void testExpressionSimpleAdditionWithoutP() throws MathsExceptions {
-        resultat = new Expression("3+4+5+6");
+        resultat = new Expression("3 + 4 + 5 + 6");
         Assert.assertEquals(resultat.getValue(), 18, 2);
     }
     @Test
