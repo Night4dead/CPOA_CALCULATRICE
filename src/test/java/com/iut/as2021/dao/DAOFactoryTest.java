@@ -1,9 +1,6 @@
 package com.iut.as2021.dao;
 
-import com.iut.as2021.DAO.DAOFactory;
-import com.iut.as2021.DAO.ETypeDAO;
-import com.iut.as2021.DAO.IDAOExpression;
-import com.iut.as2021.DAO.MySqlConnexion;
+import com.iut.as2021.DAO.*;
 import com.iut.as2021.exceptions.MathsExceptions;
 import com.iut.as2021.metiers.Expression;
 import com.mysql.cj.log.NullLogger;
@@ -35,6 +32,9 @@ public class DAOFactoryTest {
     @Mock
     private Expression mockExpression;
 
+    @Mock
+    private MySqlExpressionDAO mockMySqlDAO;
+
     public DAOFactoryTest(){
 
     }
@@ -47,6 +47,7 @@ public class DAOFactoryTest {
 
     @Before
     public void setUp() throws Exception {
+        mockMySqlDAO = mock(MySqlExpressionDAO.class);
         /*mockDAOFactory = mock(DAOFactory.class);
         mockExpression = mock(Expression.class);
 
@@ -64,9 +65,26 @@ public class DAOFactoryTest {
 
     }
 
+    public void testReadById() throws Exception{
+        /*
+        *
+        * test fait en cours recopié --> bug : \
+        *  /data/Codding/school_projects/CPOA_CALCULATRICE/src/test/java/com/iut/as2021/dao/DAOFactoryTest.java:36:13
+        *  java: cannot access com.iut.as2021.dao.MySqlExpressionDAO
+        * bad class file: /data/Codding/school_projects/CPOA_CALCULATRICE/target/classes/com/iut/as2021/dao/MySqlExpressionDAO.class
+        *    class file contains wrong class: com.iut.as2021.DAO.MySqlExpressionDAO
+        *
+        mockExpression = new Expression("1+5");
+        when(mockMySqlDAO.readById(anyInt())).thenReturn(mockExpression);
+        Assert.assertEquals(mockExpression.getValue(),6,0);
+         */
+
+    }
+
     @Test
     public void testCreateWithNoExceptions() throws Exception {
         //Assert.assertEquals(mockDAOFactory.getDAOExpression().create(mockExpression),Boolean.TRUE);
+
     }
 
     @Test(expected = SQLException.class)
