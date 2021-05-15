@@ -26,14 +26,19 @@ import java.sql.SQLException;
 @RunWith(MockitoJUnitRunner.class)
 public class DAOFactoryTest {
 
+    /*
     @Mock
     private DAOFactory mockDAOFactory;
+     */
+
 
     @Mock
     private Expression mockExpression;
-
-    @Mock
+/*
+@Mock
     private MySqlExpressionDAO mockMySqlDAO;
+ */
+
 
     public DAOFactoryTest(){
 
@@ -47,7 +52,9 @@ public class DAOFactoryTest {
 
     @Before
     public void setUp() throws Exception {
-        mockMySqlDAO = mock(MySqlExpressionDAO.class);
+        // to uncomment : mockMySqlDAO = mock(MySqlExpressionDAO.class);
+
+
         /*mockDAOFactory = mock(DAOFactory.class);
         mockExpression = mock(Expression.class);
 
