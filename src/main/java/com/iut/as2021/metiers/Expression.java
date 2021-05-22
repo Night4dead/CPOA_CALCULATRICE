@@ -66,15 +66,26 @@ public class Expression {
             } else if(this.expression.charAt(i)==')'){
                 count++;
             }
-            if(i<this.expression.length()-2 && this.expression.charAt(i)==')' && this.expression.charAt(i+1)=='('){
+            if(i<this.expression.length()-2 &&
+                    this.expression.charAt(i)==')' &&
+                    this.expression.charAt(i+1)=='('
+            ){
                 pos=-i;
                 this.ope=MULTIPLICATION;
             }
             if (this.expression.charAt(i)=='('){
                 count--;
             }
-            if(i>0 && !(this.expression.charAt(i)=='-' && (this.tools.isOperator(this.expression.charAt(i-1))||this.expression.charAt(i-1)=='('))){
-                if(this.tools.isOperator(this.expression.charAt(i)) && count==0 && ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION ) ){
+            if(i>0 &&
+                    !(this.expression.charAt(i)=='-' &&
+                            (this.tools.isOperator(this.expression.charAt(i-1))||
+                                    this.expression.charAt(i-1)=='(')
+                    )
+            ){
+                if(this.tools.isOperator(this.expression.charAt(i)) &&
+                        count==0 &&
+                        ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION )
+                ){
                     pos=i;
                     switchOpe(this.expression.charAt(i));
                 }

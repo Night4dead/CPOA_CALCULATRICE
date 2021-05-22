@@ -23,7 +23,12 @@ public class Tools {
             throw new MathsExceptions("expression entre paranthèses vide : '()'");
         }
         for (int i=0;i<expression.length();i++){
-            if(!Character.isDigit(expression.charAt(i))&&expression.charAt(i)!=' '&&!isOperator(expression.charAt(i))&&!(expression.charAt(i)=='(')&&!(expression.charAt(i)==')')){
+            if(!Character.isDigit(expression.charAt(i))
+                    &&expression.charAt(i)!=' '
+                    &&!isOperator(expression.charAt(i))
+                    &&!(expression.charAt(i)=='(')
+                    &&!(expression.charAt(i)==')'))
+            {
                 throw new MathsExceptions("l'expression contient des caractères non-autorisés");
             }
             if(expression.charAt(i)=='('){
