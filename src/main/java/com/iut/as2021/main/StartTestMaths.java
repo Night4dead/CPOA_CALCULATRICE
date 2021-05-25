@@ -1,8 +1,8 @@
 package com.iut.as2021.main;
 
 
-import com.iut.as2021.DAO.DAOFactory;
-import com.iut.as2021.DAO.ETypeDAO;
+import com.iut.as2021.dao.DAOFactory;
+import com.iut.as2021.dao.ETypeDAO;
 import com.iut.as2021.metiers.Expression;
 
 import java.util.ArrayList;

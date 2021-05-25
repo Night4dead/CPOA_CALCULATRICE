@@ -1,26 +1,12 @@
 package com.iut.as2021.dao;
 
-import com.iut.as2021.DAO.*;
-import com.iut.as2021.exceptions.MathsExceptions;
 import com.iut.as2021.metiers.Expression;
-import com.mysql.cj.log.NullLogger;
 import org.junit.*;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
-
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -77,7 +63,7 @@ public class DAOFactoryTest {
         *
         * test fait en cours recopié --> bug : \
         *  /data/Codding/school_projects/CPOA_CALCULATRICE/src/test/java/com/iut/as2021/dao/DAOFactoryTest.java:36:13
-        *  java: cannot access com.iut.as2021.dao.MySqlExpressionDAO
+        *  java: cannot access com.iut.as2021.dao.Expression.MySqlExpressionDAO
         * bad class file: /data/Codding/school_projects/CPOA_CALCULATRICE/target/classes/com/iut/as2021/dao/MySqlExpressionDAO.class
         *    class file contains wrong class: com.iut.as2021.DAO.MySqlExpressionDAO
         *

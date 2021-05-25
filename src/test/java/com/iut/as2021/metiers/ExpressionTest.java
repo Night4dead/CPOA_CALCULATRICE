@@ -258,4 +258,20 @@ public class ExpressionTest {
         e.expectMessage("l'expression contient des caractères non-autorisés");
         resultat = new Expression("=/2");
     }
+
+    @Test
+    public void testExpressionComplexWithSeveralBrackets() throws MathsExceptions {
+        resultat = new Expression("(((((2 + 3)) * ((4 + 5)) + 2)))");
+        Assert.assertEquals(resultat.getValue(), 47, 0);
+    }
+    @Test
+    public void testExpressionComplexWithSeveralBrackets2() throws MathsExceptions {
+        resultat = new Expression("(((((2 + 3)) * ((4 + 5)) + 2))) + 3 * 2");
+        Assert.assertEquals(resultat.getValue(), 53, 0);
+    }
+    @Test
+    public void testExpressionComplexWithSeveralBrackets3() throws MathsExceptions {
+        resultat = new Expression("((((((2 + 3)) * ((4 + 5)) + 2))) + 3 )* 2");
+        Assert.assertEquals(resultat.getValue(), 100, 0);
+    }
 }

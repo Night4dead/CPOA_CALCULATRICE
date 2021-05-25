@@ -1,4 +1,4 @@
-package com.iut.as2021.DAO;
+package com.iut.as2021.dao.connexion;
 
 import java.io.File;
 import java.io.FileInputStream;

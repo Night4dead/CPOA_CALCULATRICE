@@ -1,10 +1,6 @@
-package com.iut.as2021.DAO;
+package com.iut.as2021.dao;
 
-import com.iut.as2021.metiers.Expression;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface IDAO<T>{
     T readById(int i) throws Exception;
