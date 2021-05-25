@@ -12,9 +12,10 @@
     <title>Resultat</title>
 </head>
 <body>
-    <h1><s:property value="expression"/> = <s:property value="exp"/> </h1>
-    <s:form name="formHome" action="home">
-        <s:submit name="Retour" value="Retour"/>
-    </s:form>
+<s:a action="home"><h2>Calculatrice</h2></s:a>
+<p style="color: dodgerblue;"><s:property value="expression"/> = <s:property value="expRes"/> </p>
+<s:form name="formHome" action="home">
+    <s:submit name="Retour" value="Retour"/>
+</s:form>
 </body>
 </html>
