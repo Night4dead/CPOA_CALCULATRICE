@@ -30,8 +30,8 @@
 
 		<action name="calculer"
 				class="com.iut.as2021.controller.ExpressionController">
-			<result name="success">/WEB-INF/JSP/Resultat.jsp</result>
-			<result name="error">/WEB-INF/JSP/Resultat-error.jsp</result>
+			<result name="success">/WEB-INF/JSP/ExpressionController.jsp</result>
+			<result name="error">/WEB-INF/JSP/ExpressionController.jsp</result>
 		</action>
 		<action name="home"
 				class="com.iut.as2021.controller.ExpressionController">

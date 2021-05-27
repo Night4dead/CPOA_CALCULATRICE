@@ -38,7 +38,6 @@ public class ExpressionController extends ActionSupport {
         try{
             this.expRes = String.valueOf(this.expClass.getValue());
         } catch (Exception e){
-            this.expRes= e.getMessage();
             setError(e.getMessage());
         }
     }
@@ -62,9 +61,7 @@ public class ExpressionController extends ActionSupport {
     }
 
     public String execute(){
-        if (getError()!=null){
-            return Action.ERROR;
-        }
+
         return Action.SUCCESS;
     }
 
