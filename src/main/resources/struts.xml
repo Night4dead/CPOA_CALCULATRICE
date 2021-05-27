@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+	<!-- ************************************************ -->
+	<!-- * Fichier de configuration du Framework STRUTS * -->
+	<!-- ************************************************ -->
+
+	<!-- Permet d'activer le mode de developpement. Celui-ci donne des informations 
+		supplémentaires. -->
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/"
+		extends="struts-default">
+
+		<!-- Action générique ou dynamique -->
+		<!-- 1er paramètre indique le chemin du package -->
+		<!-- 2ème paramètre indique la class elle-même -->
+		<!-- 3ème paramètre indique la méthode à lancer -->
+		<!-- Un succès redirige vers une page comportant le nom de la class -->
+		<!-- Un echec redirige vers une page comportant le nom de la class prefixée 
+			par '-error' -->
+		<!-- Toutes les combinaisons sont donc possibles -->
+		<action name="">
+			<result>/WEB-INF/JSP/ExpressionController.jsp</result>
+		</action>
+
+		<action name="calculer"
+				class="com.iut.as2021.controller.ExpressionController">
+			<result name="success">/WEB-INF/JSP/Resultat.jsp</result>
+			<result name="error">/WEB-INF/JSP/Resultat-error.jsp</result>
+		</action>
+		<action name="home"
+				class="com.iut.as2021.controller.ExpressionController">
+			<result name="success">/WEB-INF/JSP/ExpressionController.jsp</result>
+		</action>
+
+
+	</package>
+</struts>

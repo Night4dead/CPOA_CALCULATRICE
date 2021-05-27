@@ -39,6 +39,9 @@ public class Expression {
         }
         tools = new Tools();
         this.expression = tools.trimParenthesis(exp);
+        if (this.expression.length()==1 && tools.isNotADigit(0,this.expression)){
+            throw new MathsExceptions("l'expression ne contient pas de chiffres");
+        }
         this.ope=INCONNUE;
         assignLeftRightExpressions();
         maths = new Maths();
@@ -61,37 +64,42 @@ public class Expression {
     private int getPosition(){
         int pos=0,count=0;
         for(int i=this.expression.length()-1;i>-1;i--){
-            if(this.expression.charAt(i)==')' && count==0){
-                count++;
-            } else if(this.expression.charAt(i)==')'){
+            if(tools.isClosingParentheses(i,this.expression)){
                 count++;
             }
-            if(i<this.expression.length()-2 &&
-                    this.expression.charAt(i)==')' &&
-                    this.expression.charAt(i+1)=='('
-            ){
+            if(isImplicitMultiplication(i,i+1)){
                 pos=-i;
                 this.ope=MULTIPLICATION;
             }
-            if (this.expression.charAt(i)=='('){
+            if (tools.isOpenParentheses(i,this.expression)){
                 count--;
             }
-            if(i>0 &&
-                    !(this.expression.charAt(i)=='-' &&
-                            (this.tools.isOperator(this.expression.charAt(i-1))||
-                                    this.expression.charAt(i-1)=='(')
-                    )
-            ){
-                if(this.tools.isOperator(this.expression.charAt(i)) &&
-                        count==0 &&
-                        ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION )
-                ){
+            if(i>0 && !isNegativeNumber(i)){
+                if(isNewOperator(i,count,pos)){
                     pos=i;
                     switchOpe(this.expression.charAt(i));
                 }
             }
         }
         return pos;
+    }
+
+    private boolean isNegativeNumber(int iCurrent){
+        return this.expression.charAt(iCurrent)=='-' &&
+                (tools.isOperator(this.expression.charAt(iCurrent-1)) ||
+                        tools.isOpenParentheses(iCurrent-1,this.expression));
+    }
+
+    private boolean isNewOperator(int iCurrent, int count, int pos){
+        return tools.isOperator(this.expression.charAt(iCurrent)) &&
+                count==0 &&
+                ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION );
+    }
+
+    private boolean isImplicitMultiplication(int iCurrent, int iBefore){
+        return iCurrent<this.expression.length()-2 &&
+                tools.isClosingParentheses(iCurrent,this.expression) &&
+                tools.isOpenParentheses(iBefore,this.expression);
     }
 
     private void switchOpe(char c){
@@ -130,18 +138,6 @@ public class Expression {
                 res = maths.division(leftExpression.getValue(),rightExpression.getValue());
         }
         return res;
-    }
-
-    public Expression getLeftExpression() {
-        return leftExpression;
-    }
-
-    public Expression getRightExpression() {
-        return rightExpression;
-    }
-
-    public Operation getOpe(){
-        return this.ope;
     }
 
     public String getExpression() {

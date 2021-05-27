@@ -258,4 +258,48 @@ public class ExpressionTest {
         e.expectMessage("l'expression contient des caractères non-autorisés");
         resultat = new Expression("=/2");
     }
+
+    @Test
+    public void testExpressionNotNumnber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression ne contient pas de chiffres");
+        resultat = new Expression("+");
+    }
+
+    @Test
+    public void testExpressionNotNumnber2() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression ne contient pas de chiffres");
+        resultat = new Expression("-");
+    }
+
+    @Test
+    public void testExpressionNotNumnber3() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression ne contient pas de chiffres");
+        resultat = new Expression("/");
+    }
+
+    @Test
+    public void testExpressionNotNumnber4() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("ar");
+    }
+
+    @Test
+    public void testExpressionComplexWithSeveralBrackets() throws MathsExceptions {
+        resultat = new Expression("(((((2 + 3)) * ((4 + 5)) + 2)))");
+        Assert.assertEquals(resultat.getValue(), 47, 0);
+    }
+    @Test
+    public void testExpressionComplexWithSeveralBrackets2() throws MathsExceptions {
+        resultat = new Expression("(((((2 + 3)) * ((4 + 5)) + 2))) + 3 * 2");
+        Assert.assertEquals(resultat.getValue(), 53, 0);
+    }
+    @Test
+    public void testExpressionComplexWithSeveralBrackets3() throws MathsExceptions {
+        resultat = new Expression("((((((2 + 3)) * ((4 + 5)) + 2))) + 3 )* 2");
+        Assert.assertEquals(resultat.getValue(), 100, 0);
+    }
 }

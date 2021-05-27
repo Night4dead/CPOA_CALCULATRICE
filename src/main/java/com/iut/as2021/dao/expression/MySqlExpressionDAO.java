@@ -1,11 +1,12 @@
-package com.iut.as2021.DAO;
+package com.iut.as2021.dao.expression;
 
+import com.iut.as2021.dao.connexion.MySqlConnexion;
 import com.iut.as2021.metiers.Expression;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class MySqlExpressionDAO implements IDAOExpression{
+public class MySqlExpressionDAO implements IDAOExpression {
 
     private static MySqlExpressionDAO instance;
 

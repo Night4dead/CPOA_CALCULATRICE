@@ -1,4 +1,7 @@
-package com.iut.as2021.DAO;
+package com.iut.as2021.dao;
+
+import com.iut.as2021.dao.expression.IDAOExpression;
+import com.iut.as2021.dao.mysql.MySqlDAOFactory;
 
 public abstract class DAOFactory {
     public static DAOFactory getDAOFactory(ETypeDAO cible){
