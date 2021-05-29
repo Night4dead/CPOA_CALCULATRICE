@@ -12,7 +12,7 @@
     <title>Calculatrice</title>
 </head>
 <body>
-<s:a action="home"><h2>Calculatrice</h2></s:a>
+<s:a action=""><h2>Calculatrice</h2></s:a>
 <s:set var="expRes" value="expRes"/>
 <s:set var="errors" value="error"/>
 

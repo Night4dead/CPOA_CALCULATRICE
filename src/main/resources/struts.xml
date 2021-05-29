@@ -25,19 +25,14 @@
 			par '-error' -->
 		<!-- Toutes les combinaisons sont donc possibles -->
 		<action name="">
-			<result>/WEB-INF/JSP/ExpressionController.jsp</result>
+			<result>/WEB-INF/JSP/Calculatrice.jsp</result>
 		</action>
 
 		<action name="calculer"
-				class="com.iut.as2021.controller.ExpressionController">
-			<result name="success">/WEB-INF/JSP/ExpressionController.jsp</result>
-			<result name="error">/WEB-INF/JSP/ExpressionController.jsp</result>
+				class="com.iut.as2021.controller.CalculatriceController" method="execute">
+			<result name="success">/WEB-INF/JSP/Calculatrice.jsp</result>
+			<result name="error">/WEB-INF/JSP/Calculatrice.jsp</result>
 		</action>
-		<action name="home"
-				class="com.iut.as2021.controller.ExpressionController">
-			<result name="success">/WEB-INF/JSP/ExpressionController.jsp</result>
-		</action>
-
 
 	</package>
 </struts>
