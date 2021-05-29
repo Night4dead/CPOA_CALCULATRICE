@@ -9,7 +9,6 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ExpressionController extends ActionSupport {
     private String expression;
     private String expRes;
-    private Expression expClass;
     private String error;
 
 
@@ -21,36 +20,15 @@ public class ExpressionController extends ActionSupport {
     public void setExpression(String expression){
         this.expression = expression;
         try {
-            setExpClass(new Expression(this.expression));
+            this.expRes = String.valueOf((new Expression(this.expression)).getValue());
         } catch ( Exception e){
             setError(e.getMessage());
         }
     }
 
     public String getExpRes() {
-        if (this.error!=null){
-            return this.error;
-        }
         return expRes;
     }
-
-    public void setExpRes(String exp) {
-        try{
-            this.expRes = String.valueOf(this.expClass.getValue());
-        } catch (Exception e){
-            setError(e.getMessage());
-        }
-    }
-
-    public Expression getExpClass() {
-        return expClass;
-    }
-
-    public void setExpClass(Expression exp_class) {
-        this.expClass = exp_class;
-        setExpRes("");
-    }
-
 
     public String getError() {
         return error;
