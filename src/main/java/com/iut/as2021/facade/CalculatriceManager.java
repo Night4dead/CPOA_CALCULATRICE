@@ -13,6 +13,7 @@ public class CalculatriceManager {
         this.dao = dao;
     }
 
+
     public String calculer(String expression) throws MathsExceptions {
         try{
             calculatrice = new Expression(expression);

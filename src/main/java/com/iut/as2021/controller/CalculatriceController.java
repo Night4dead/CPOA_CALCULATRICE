@@ -14,7 +14,7 @@ public class CalculatriceController extends ActionSupport {
     private String expRes;
     private String error;
 
-    private static final String APPLICATION_CONTEXT_FILE = "applicationContext.xml";
+    //private static final String APPLICATION_CONTEXT_FILE = "applicationContext.xml";
 
     private CalculatriceManager manager;
 
