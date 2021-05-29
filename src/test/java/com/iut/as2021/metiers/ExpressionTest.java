@@ -179,12 +179,30 @@ public class ExpressionTest {
     }
 
     @Test
-    public void testExpressionBy0() throws MathsExceptions{
+    public void testExpressionBy01() throws MathsExceptions{
         e.expect(MathsExceptions.class);
         e.expectMessage("Division par zero impossible");
         resultat = new Expression("1/0");
         Assert.assertEquals(resultat.getValue(),1,2);
     }
+    @Test
+    public void testExpressionBy02() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("Division par zero impossible");
+        resultat = new Expression("1/(1-1)");
+        Assert.assertEquals(resultat.getValue(),1,2);
+    }
+    @Test
+    public void testExpressionBy03() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("Division par zero impossible");
+        resultat = new Expression("1/(((2*5)+4)*0)");
+        Assert.assertEquals(resultat.getValue(),1,2);
+    }
+
+
+
+
 
     @Test
     public void testExpressionEmpty() throws MathsExceptions{
