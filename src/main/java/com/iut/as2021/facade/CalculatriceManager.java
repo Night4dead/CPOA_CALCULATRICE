@@ -1,20 +1,16 @@
 package com.iut.as2021.facade;
 
-import com.iut.as2021.dao.DAOFactory;
 import com.iut.as2021.dao.expression.IDAOExpression;
 import com.iut.as2021.exceptions.MathsExceptions;
 import com.iut.as2021.metiers.Expression;
-
-import static com.iut.as2021.dao.ETypeDAO.MYSQL;
 
 public class CalculatriceManager {
 
     private IDAOExpression dao;
     private Expression calculatrice;
 
-
-    public CalculatriceManager(){
-        dao = DAOFactory.getDAOFactory(MYSQL).getDAOExpression();
+    public CalculatriceManager(IDAOExpression dao){
+        this.dao = dao;
     }
 
     public String calculer(String expression) throws MathsExceptions {
