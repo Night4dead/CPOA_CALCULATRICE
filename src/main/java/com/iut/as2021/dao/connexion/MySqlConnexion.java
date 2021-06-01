@@ -26,6 +26,7 @@ public class MySqlConnexion {
     }
 
     public Connection getSqlConnexion() throws SQLException {
+
         if(this.sqlConnexion==null || this.sqlConnexion.isClosed()){
             this.sqlConnexion = DriverManager.getConnection(this.url,this.login,this.pwd);
         }
@@ -33,16 +34,17 @@ public class MySqlConnexion {
     }
 
     private void readProperties(){
-        Properties p = new Properties();
+        //Properties p = new Properties();
 
-        File file = new File("config/mysql.properties");
+        //File file = new File("config/mysql.properties");
         try {
-            FileInputStream source = new FileInputStream(file);
-            p.loadFromXML(source);
-            this.url="jdbc:mysql://"+p.getProperty("url")+":"+p.getProperty("port")+"/"+p.getProperty("bdd");
-            this.login = p.getProperty("login");
-            this.pwd = p.getProperty("pass");
-        } catch (IOException ioe){
+            //FileInputStream source = new FileInputStream(file);
+            //p.loadFromXML(source);
+            Class.forName("com.mysql.jdbc.Driver");
+            this.url="jdbc:mysql://"+"devbdd.iutmetz.univ-lorraine.fr"+":"+"3306"+"/"+"kaczmar11u_cpoa_calc";
+            this.login = "kaczmar11u_appli";
+            this.pwd = "31707418";
+        } catch (Exception ioe){
             System.out.println("probleme de lecture des properties MySQL : "+ioe.getMessage());
         }
     }
