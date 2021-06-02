@@ -10,10 +10,10 @@
     <!-- ************************************************************ -->
 
     <!-- ============= Modele ============= -->
-    <bean id="calculatriceController"
-          class="com.iut.as2021.controller.CalculatriceController">
-        <constructor-arg index="0" ref="calculatriceManager"/>
-    </bean>
+    <!--<bean id="calculatriceController"
+          class="com.iut.as2021.controller.CalculatriceControllerSpring">
+        <constructor-arg ref="calculatriceManager"/>
+    </bean>-->
 
     <!-- Injection des managers dans la facade par le constructor -->
     <bean id="calculatriceManager"
@@ -25,6 +25,9 @@
     <bean id="dao" class="com.iut.as2021.dao.expression.MySqlExpressionDAO">
         <!-- <property name="dao" ref="daoHibernate" /> -->
     </bean>
+
+
+
 
 
 

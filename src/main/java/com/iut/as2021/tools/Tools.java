@@ -1,7 +1,6 @@
 package com.iut.as2021.tools;
 
 import com.iut.as2021.exceptions.MathsExceptions;
-import com.iut.as2021.metiers.Expression;
 
 public class Tools {
     public String getRightElement(String expression, int signe) {
@@ -33,14 +32,14 @@ public class Tools {
                 if(i==0){
                     first=true;
                 }
-                if (i>0&&first==true){
+                if (i>0&& first){
                     count--;
                 }
             }
             if(isClosingParentheses(i,expression) && i>0){
                 cmptOpen--;
                 count++;
-                if(cmptOpen==0&&first==true){
+                if(cmptOpen==0&& first){
                     first=false;
                 }
             }

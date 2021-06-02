@@ -2,10 +2,12 @@ package com.iut.as2021.dao.expression;
 
 import com.iut.as2021.dao.connexion.MySqlConnexion;
 import com.iut.as2021.metiers.Expression;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 
+@Component("dao")
 public class MySqlExpressionDAO implements IDAOExpression {
 
     private static MySqlExpressionDAO instance;
