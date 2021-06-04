@@ -1,15 +1,19 @@
 package com.iut.as2021.dao.connexion;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import com.iut.as2021.tools.LoaderTools;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static org.apache.log4j.Logger.getLogger;
+
 public class MySqlConnexion {
     private static MySqlConnexion instance;
+
+    private static final Logger logger = getLogger(MySqlConnexion.class);
 
     public static MySqlConnexion getInstance(){
         if(instance == null){
@@ -34,18 +38,14 @@ public class MySqlConnexion {
     }
 
     private void readProperties(){
-        //Properties p = new Properties();
-
-        //File file = new File("config/mysql.properties");
         try {
-            //FileInputStream source = new FileInputStream(file);
-            //p.loadFromXML(source);
-            Class.forName("com.mysql.jdbc.Driver");
-            this.url="jdbc:mysql://"+"devbdd.iutmetz.univ-lorraine.fr"+":"+"3306"+"/"+"kaczmar11u_cpoa_calc";
-            this.login = "kaczmar11u_appli";
-            this.pwd = "31707418";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Properties p = LoaderTools.loader("/mysql.properties");
+            this.url="jdbc:mysql://"+p.getProperty("url")+":"+p.getProperty("port")+"/"+p.getProperty("bdd");
+            this.login = p.getProperty("login");
+            this.pwd = p.getProperty("pass");
         } catch (Exception ioe){
-            System.out.println("probleme de lecture des properties MySQL : "+ioe.getMessage());
+            logger.error("probleme de lecture des properties MySQL : "+ioe.getMessage());
         }
     }
 }

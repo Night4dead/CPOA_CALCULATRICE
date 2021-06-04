@@ -1,31 +1,27 @@
 package com.iut.as2021.controller;
 
-
 import com.iut.as2021.facade.CalculatriceManager;
 import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-public class CalculatriceController extends ActionSupport {
+@Controller
+public class CalculatriceControllerSpring {
 
-    private static final Logger logger = Logger.getLogger(CalculatriceController.class);
+    private static final Logger logger = Logger.getLogger(CalculatriceControllerSpring.class);
 
     private String expression;
     private String expRes;
     private String error;
 
-    private static final String APPLICATION_CONTEXT_FILE = "applicationContext.xml";
-
-
+    @Autowired
     private CalculatriceManager calculatriceManager;
 
-    public CalculatriceController(){
-        ClassPathResource cp = new ClassPathResource(APPLICATION_CONTEXT_FILE);
-        XmlBeanFactory factory = new XmlBeanFactory(cp);
-        this.calculatriceManager = (CalculatriceManager) factory.getBean("calculatriceManager");
-    }
+    /*public CalculatriceControllerSpring(CalculatriceManager calculatriceManager) {
+        this.calculatriceManager=calculatriceManager;
+    }*/
+
 
     public String getExpression() {
         return expression;
@@ -47,9 +43,14 @@ public class CalculatriceController extends ActionSupport {
         this.error = error;
     }
 
-    public String execute(){
+    public String calculate(){
         try {
+            System.out.println("enter");
+            System.out.println(calculatriceManager);
+            logger.debug(calculatriceManager);
             expRes = calculatriceManager.calculer(this.expression);
+            System.out.println(expRes);
+            logger.debug(expRes);
             calculatriceManager.saveResult();
             return Action.SUCCESS;
         } catch (Exception e){

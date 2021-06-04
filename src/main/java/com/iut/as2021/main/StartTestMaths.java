@@ -13,12 +13,8 @@ public class StartTestMaths {
 
 
 		try {
-			//System.out.println(exp+", left element : "+exp.getLeftExpression()+", right element : "+exp.getRightExpression().getExpression()+", ope : "+exp.getOpe());
-			//System.out.println(exp.getValue());
 			DAOFactory daof = DAOFactory.getDAOFactory(ETypeDAO.MYSQL);
 			ArrayList<Expression> exp2 = daof.getDAOExpression().getAll();
-			//System.out.println("done");
-			//System.out.println(daof.getDAOExpression().readById(exp.getId()));
 			for (Expression e : exp2) {
 				System.out.println("id "+e.getId()+" : "+e.getExpression()+" = "+e.getValue());
 			}
