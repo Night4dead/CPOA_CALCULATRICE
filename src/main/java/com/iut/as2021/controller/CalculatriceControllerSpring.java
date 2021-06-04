@@ -45,11 +45,8 @@ public class CalculatriceControllerSpring {
 
     public String calculate(){
         try {
-            System.out.println("enter");
-            System.out.println(calculatriceManager);
             logger.debug(calculatriceManager);
             expRes = calculatriceManager.calculer(this.expression);
-            System.out.println(expRes);
             logger.debug(expRes);
             calculatriceManager.saveResult();
             return Action.SUCCESS;
