@@ -1,6 +1,6 @@
 package com.iut.as2021.controller;
 
-import com.iut.as2021.facade.CalculatriceManager;
+import com.iut.as2021.controller.facade.CalculatriceManager;
 import com.opensymphony.xwork2.Action;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

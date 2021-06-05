@@ -1,4 +1,4 @@
-package com.iut.as2021.facade;
+package com.iut.as2021.controller.facade;
 
 import com.iut.as2021.dao.expression.IDAOExpression;
 import com.iut.as2021.exceptions.MathsExceptions;
