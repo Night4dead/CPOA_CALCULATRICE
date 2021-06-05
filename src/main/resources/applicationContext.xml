@@ -10,10 +10,10 @@
     <!-- ************************************************************ -->
 
     <!-- ============= Modele ============= -->
-    <!--<bean id="calculatriceController"
+    <bean id="calculatriceController"
           class="com.iut.as2021.controller.CalculatriceControllerSpring">
         <constructor-arg ref="calculatriceManager"/>
-    </bean>-->
+    </bean>
 
     <!-- Injection des managers dans la facade par le constructor -->
     <bean id="calculatriceManager"

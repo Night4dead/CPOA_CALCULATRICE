@@ -39,7 +39,7 @@ public class MySqlConnexion {
 
     private void readProperties(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             Properties p = LoaderTools.loader("/mysql.properties");
             this.url="jdbc:mysql://"+p.getProperty("url")+":"+p.getProperty("port")+"/"+p.getProperty("bdd");
             this.login = p.getProperty("login");

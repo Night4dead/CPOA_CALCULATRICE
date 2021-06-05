@@ -18,7 +18,8 @@ public class CalculatriceControllerSpring {
     @Autowired
     private CalculatriceManager calculatriceManager;
 
-    /*public CalculatriceControllerSpring(CalculatriceManager calculatriceManager) {
+    /*@Autowired
+    public CalculatriceControllerSpring(CalculatriceManager calculatriceManager) {
         this.calculatriceManager=calculatriceManager;
     }*/
 
