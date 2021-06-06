@@ -1,4 +1,3 @@
-
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -21,7 +20,7 @@
 
 <form:form action="calculate" method="POST" modelAttribute="expression">
     <p style="color: red;">${errors}</p>
-    <p style="color: dodgerblue;"> ${exp} = ${result} </p>
+    <p style="color: dodgerblue;"> ${expression.exp} = ${expression.res} </p>
     <table>
         <tr>
             <th>Expression : </th>
@@ -31,5 +30,19 @@
 
     <button id="btn" type="submit">Calculer</button>
 </form:form>
+
+<h3>past expressions:</h3>
+<table>
+    <tr>
+        <th>Expression</th>
+        <th>Result</th>
+    </tr>
+    <c:forEach items="${expressions}" var="expressionItem">
+        <tr>
+            <td>${expressionItem.exp}</td>
+            <td>${expressionItem.res}</td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>

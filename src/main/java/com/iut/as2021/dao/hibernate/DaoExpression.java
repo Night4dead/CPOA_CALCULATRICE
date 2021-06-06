@@ -12,16 +12,11 @@ import javax.transaction.Transactional;
 public class DaoExpression extends AbstractDao<Integer, EntityExpression> implements IDaoExpression {
     @Override
     public EntityExpression readById(Integer id) {
-        return null;
+        return getByKey(id);
     }
 
     @Override
     public void deleteExpressionbyId(Integer id) {
-
-    }
-
-    @Override
-    public EntityExpression getExpressionById(String id) {
-        return null;
+        delete(getByKey(id));
     }
 }

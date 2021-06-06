@@ -6,5 +6,4 @@ import com.iut.as2021.dao.interfaces.IDaoGeneric;
 public interface IDaoExpression extends IDaoGeneric<EntityExpression> {
     void deleteExpressionbyId(Integer id);
 
-    EntityExpression getExpressionById(String id);
 }

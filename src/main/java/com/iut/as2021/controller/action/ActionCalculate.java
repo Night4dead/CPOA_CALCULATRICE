@@ -34,6 +34,7 @@ public class ActionCalculate {
         try {
             model.addAttribute("message","Welcome !");
             model.addAttribute("expression",initCalculatrice());
+            model.addAttribute("expressions",manager.getExpressions());
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
@@ -41,13 +42,12 @@ public class ActionCalculate {
     }
 
     @PostMapping("/calculate")
-    public String calculateExpression(@ModelAttribute("exp") @Valid String exp, Model model){
+    public String calculateExpression(@ModelAttribute("expression") @Valid BoExpression expression, Model model){
         try{
-            logger.info("l'expression est : "+exp);
-            String result = manager.calculer(exp);
-            logger.info("le résultat est : "+result);
-            model.addAttribute("result", result);
-            model.addAttribute("exp", exp);
+            logger.info("l'expression est : "+expression.getExp());
+            expression.setRes(manager.calculer(expression.getExp()));
+            manager.saveExpression(expression);
+            model.addAttribute("expressions",manager.getExpressions());
             return MAIN_PAGE;
         } catch(MathsExceptions e){
             logger.error(e.getMessage());
