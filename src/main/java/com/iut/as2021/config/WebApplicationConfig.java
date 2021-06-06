@@ -29,7 +29,7 @@ public class WebApplicationConfig implements WebMvcConfigurer, LoadTimeWeavingCo
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setPrefix("/WEB-INF/");
         resolver.setSuffix(".jsp");
         return resolver;
     }

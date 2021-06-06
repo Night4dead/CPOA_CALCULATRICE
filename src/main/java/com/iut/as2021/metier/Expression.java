@@ -1,4 +1,4 @@
-package com.iut.as2021.metiers;
+package com.iut.as2021.metier;
 
 import static com.iut.as2021.enums.Operation.ADDITION;
 import static com.iut.as2021.enums.Operation.DIVISION;
@@ -17,6 +17,7 @@ public class Expression {
     private IMaths maths;
     private Tools tools;
 
+
     private String expression;
     private int id;
 
@@ -32,6 +33,10 @@ public class Expression {
         }
         return res;
     }
+
+    public Expression(){
+    }
+
 
     public Expression(String exp) throws MathsExceptions{
         if (exp == null || exp.isEmpty()){

@@ -1,6 +1,7 @@
 package com.iut.as2021.metiers;
 
 import com.iut.as2021.exceptions.MathsExceptions;
+import com.iut.as2021.metier.Calculer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,4 +1,4 @@
-package com.iut.as2021.metiers;
+package com.iut.as2021.metier;
 
 import com.iut.as2021.interfaces.IMaths;
 import com.iut.as2021.mathematics.Maths;
