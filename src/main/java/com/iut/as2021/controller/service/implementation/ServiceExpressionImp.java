@@ -42,6 +42,14 @@ public class ServiceExpressionImp implements IServiceExpression {
     }
 
     @Override
+    public void deleteAll() throws MathsExceptions {
+        List<BoExpression> expressionList = expressionList();
+        for (BoExpression entity : expressionList){
+            daofg.getDaoExpression().deleteExpressionbyId(entity.getId());
+        }
+    }
+
+    @Override
     public List<BoExpression> expressionList() throws MathsExceptions {
         List<BoExpression> expressionList = new ArrayList<>();
         for (EntityExpression entity : daofg.getDaoExpression().getList()){

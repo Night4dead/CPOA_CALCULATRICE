@@ -11,5 +11,7 @@ public interface IServiceExpression {
 
     void save(BoExpression expression) throws MathsExceptions;
 
+    void deleteAll() throws MathsExceptions;
+
     List<BoExpression> expressionList() throws MathsExceptions;
 }

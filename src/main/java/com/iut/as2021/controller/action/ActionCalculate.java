@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -44,15 +45,28 @@ public class ActionCalculate {
     @PostMapping("/calculate")
     public String calculateExpression(@ModelAttribute("expression") @Valid BoExpression expression, Model model){
         try{
+            model.addAttribute("expressions",manager.getExpressions());
             logger.info("l'expression est : "+expression.getExp());
             expression.setRes(manager.calculer(expression.getExp()));
             manager.saveExpression(expression);
-            model.addAttribute("expressions",manager.getExpressions());
             return MAIN_PAGE;
         } catch(MathsExceptions e){
             logger.error(e.getMessage());
             model.addAttribute("errors", e.getMessage());
             return MAIN_PAGE;
         }
+    }
+
+    @GetMapping("/deleteAll")
+    public String deleteAll(Model model){
+        logger.info("suppression des expressions");
+        try {
+            manager.deleteAll();
+            reinitModel(model);
+        } catch (Exception e){
+            logger.error(e.getMessage());
+            model.addAttribute("errors", e.getMessage());
+        }
+        return MAIN_PAGE;
     }
 }

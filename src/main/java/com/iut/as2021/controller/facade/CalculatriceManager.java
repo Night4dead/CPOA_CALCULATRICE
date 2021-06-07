@@ -42,6 +42,15 @@ public class CalculatriceManager {
         }
     }
 
+    public void deleteAll() throws MathsExceptions {
+        logger.info("-> suppressions des expressions");
+        try {
+            serviceExpression.deleteAll();
+        } catch (Exception e) {
+            throw new MathsTechnicalException(e.getMessage());
+        }
+    }
+
     public List<BoExpression> getExpressions() throws MathsExceptions {
         logger.info("-> liste des expressions");
         try {
