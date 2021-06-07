@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculatriceComponent } from './calculatrice/calculatrice.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { ExpressionServiceService } from "./service/expression-service.service";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ExpressionServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

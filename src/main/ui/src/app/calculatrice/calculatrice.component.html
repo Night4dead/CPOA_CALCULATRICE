@@ -18,7 +18,7 @@
                 <form [formGroup]="expressionForm" (ngSubmit)="submitForm()" novalidate>
                   <input class="fs-3" style="width: 220px; background-color: lightgray; border: none" type="text" formControlName="expression" required="Veuillez indiquer une expression"/>
                 </form>
-                <p class="visually-hidden"></p>
+                <p id="res" class="visually-hidden"></p>
               </div>
             </div>
 
@@ -92,3 +92,9 @@
     </div>
   </div>
 </div>
+<table>
+  <title>Past Expressions</title>
+  <tr *ngFor="let exp of expressions">
+    <td>{{exp.expression}}</td>
+  </tr>
+</table>
