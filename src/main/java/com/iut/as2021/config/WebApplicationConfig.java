@@ -9,9 +9,7 @@ import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -24,7 +22,7 @@ import static org.springframework.context.annotation.EnableLoadTimeWeaving.Aspec
 @EnableSpringConfigured
 @EnableLoadTimeWeaving(aspectjWeaving = ENABLED)
 @EnableWebMvc
-public class WebApplicationConfig implements WebMvcConfigurer, LoadTimeWeavingConfigurer {
+public class WebApplicationConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer, LoadTimeWeavingConfigurer {
     @Bean
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -40,6 +38,11 @@ public class WebApplicationConfig implements WebMvcConfigurer, LoadTimeWeavingCo
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 
     @Bean

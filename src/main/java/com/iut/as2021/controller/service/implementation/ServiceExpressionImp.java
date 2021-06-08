@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,9 @@ public class ServiceExpressionImp implements IServiceExpression {
     @Override
     public String calculate(String expression) throws MathsExceptions {
         logger.info("************* Calcul de l'expression : "+ expression);
-        return String.valueOf((new Expression(expression)).getValue());
+        DecimalFormat df = new DecimalFormat("#");
+        df.setMaximumFractionDigits(100);
+        return df.format((new Expression(expression)).getValue());
     }
 
     @Override

@@ -7,15 +7,19 @@ import com.iut.as2021.metier.Expression;
 import com.iut.as2021.modele.BoExpression;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
+
 @Component
 public class DtoExpression implements IDtoGeneric<BoExpression, EntityExpression> {
     @Override
     public BoExpression adapt(EntityExpression object) throws MathsExceptions {
+        DecimalFormat df = new DecimalFormat("#");
+        df.setMaximumFractionDigits(100);
         if(object != null){
             BoExpression expression = new BoExpression();
             expression.setId(object.getId());
             expression.setExp(object.getExpression());
-            expression.setRes(String.valueOf((new Expression(object.getExpression())).getValue()));
+            expression.setRes(df.format((new Expression(object.getExpression())).getValue()));
             return expression;
         }
         return null;
