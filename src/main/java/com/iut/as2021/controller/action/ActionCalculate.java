@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,7 +29,13 @@ public class ActionCalculate {
     @ModelAttribute("expression")
     public BoExpression initCalculatrice() { return new BoExpression();}
 
-    private void reinitModel(Model model) throws MathsExceptions { model.addAttribute("expression", initCalculatrice()); }
+    @ModelAttribute("expressions")
+    public List<BoExpression> initHistory() throws MathsExceptions { return manager.getExpressions(); }
+
+    private void reinitModel(Model model) throws MathsExceptions {
+        model.addAttribute("expression", initCalculatrice());
+        model.addAttribute("expressions", initHistory());
+    }
 
     @GetMapping("/")
     public String formCalculate(Locale locale, Model model){
@@ -45,10 +52,10 @@ public class ActionCalculate {
     @PostMapping("/calculate")
     public String calculateExpression(@ModelAttribute("expression") @Valid BoExpression expression, Model model){
         try{
-            model.addAttribute("expressions",manager.getExpressions());
             logger.info("l'expression est : "+expression.getExp());
             expression.setRes(manager.calculer(expression.getExp()));
             manager.saveExpression(expression);
+            model.addAttribute("expressions",manager.getExpressions());
             return MAIN_PAGE;
         } catch(MathsExceptions e){
             logger.error(e.getMessage());
@@ -57,11 +64,11 @@ public class ActionCalculate {
         }
     }
 
-    @GetMapping("/deleteAll")
-    public String deleteAll(Model model){
+    @PostMapping("/deleteAll")
+    public String deleteAll(@ModelAttribute("expressions") @Valid List<BoExpression> expressions,Model model){
         logger.info("suppression des expressions");
         try {
-            manager.deleteAll();
+            manager.deleteAll(expressions);
             reinitModel(model);
         } catch (Exception e){
             logger.error(e.getMessage());

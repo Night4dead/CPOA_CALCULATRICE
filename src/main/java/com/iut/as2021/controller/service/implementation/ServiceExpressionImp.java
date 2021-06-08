@@ -5,6 +5,7 @@ import com.iut.as2021.controller.service.interfaces.IServiceExpression;
 import com.iut.as2021.dao.entity.EntityExpression;
 import com.iut.as2021.dao.factory.DaoFactoryGeneric;
 import com.iut.as2021.exceptions.MathsExceptions;
+import com.iut.as2021.exceptions.MathsTechnicalException;
 import com.iut.as2021.metier.Expression;
 import com.iut.as2021.modele.BoExpression;
 import org.apache.log4j.Logger;
@@ -26,7 +27,24 @@ public class ServiceExpressionImp implements IServiceExpression {
     private DtoFacadeManager dto;
 
     @Override
+    public void setDao(DaoFactoryGeneric daoFactoryGeneric) throws MathsExceptions {
+        if(daofg == null){
+            throw new MathsTechnicalException("[Attention la Dao de type 'Factory Generic' est null ... ]");
+        }
+        this.daofg = daoFactoryGeneric;
+    }
+
+    @Override
+    public void setDto(DtoFacadeManager dtoManager) throws MathsExceptions {
+        if(dto == null){
+            throw new MathsTechnicalException("[Attention le DTO manager est null ... ]");
+        }
+        this.dto = dtoManager;
+    }
+
+    @Override
     public String calculate(String expression) throws MathsExceptions {
+        logger.info("************* Calcul de l'expression : "+ expression);
         return String.valueOf((new Expression(expression)).getValue());
     }
 
@@ -42,8 +60,8 @@ public class ServiceExpressionImp implements IServiceExpression {
     }
 
     @Override
-    public void deleteAll() throws MathsExceptions {
-        List<BoExpression> expressionList = expressionList();
+    public void deleteAll(List<BoExpression> expressionList) throws MathsExceptions {
+        logger.info("*********** Suppressions des expressions");
         for (BoExpression entity : expressionList){
             daofg.getDaoExpression().deleteExpressionbyId(entity.getId());
         }
@@ -58,4 +76,6 @@ public class ServiceExpressionImp implements IServiceExpression {
         logger.info("************ Récupération des expressions, nb : "+expressionList.size());
         return expressionList;
     }
+
+
 }

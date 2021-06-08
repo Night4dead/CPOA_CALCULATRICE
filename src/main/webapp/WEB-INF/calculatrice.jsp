@@ -17,8 +17,14 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
     <style>
         html {
-            font-size: 62.5%;
+            font-size: 0.7em;
             box-sizing: border-box;
+            font-family: "MesloLGS NF";
+        }
+
+        body {
+            background-color: #6e6e6e;
+            color: #abbfb7;
         }
 
         *, *::before, *::after {
@@ -28,7 +34,7 @@
         }
 
         .calculator {
-            border: 1px solid #ccc;
+            border: 1px solid black;
             border-radius: 5px;
             position: absolute;
             top: 50%;
@@ -54,11 +60,12 @@
             width: 100%;
             min-height: 80px;
             text-wrap: initial;
-            font-size: 3rem;
+            font-size: 2rem;
             border: none;
             background-color: #252525;
             color: #fff;
             text-align: right;
+            padding-top: 10px;
             padding-right: 20px;
             padding-left: 10px;
         }
@@ -66,11 +73,12 @@
         .calculator-screen-errors {
             width: 100%;
             border: none;
-            font-size: 3rem;
+            font-size: 2rem;
             min-height: 80px;
             background-color: #252525;
             color: red;
             text-align: right;
+            padding-top: 10px;
             padding-right: 20px;
             padding-left: 10px;
             text-wrap: normal;
@@ -78,15 +86,15 @@
 
         button {
             height: 60px;
-            background-color: #fff;
-            border-radius: 3px;
-            border: 1px solid #c4c4c4;
-            background-color: transparent;
+            background-color: #303030;
+            border: 0px solid #c4c4c4;
+            /*border-radius: 3px;
+            background-color: transparent;*/
             font-size: 2rem;
-            color: #333;
-            background-image: linear-gradient(to bottom,transparent,transparent 50%,rgba(0,0,0,.04));
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 0 rgba(255,255,255,.15), 0 1px 0 0 rgba(255,255,255,.15);
-            text-shadow: 0 1px rgba(255,255,255,.4);
+            color: #bf1a73;
+            /*background-image: linear-gradient(to bottom,transparent,transparent 50%,rgba(0,0,0,.04));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 0 rgba(255,255,255,.15), 0 1px 0 0 rgba(255,255,255,.15);*/
+            text-shadow: 0 1px #252525;
         }
 
 
@@ -103,33 +111,23 @@
             overflow: auto; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
-            /*
-
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            position: absolute;
-            top:75%;
-            left: 85%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            */
         }
 
         .history-content {
-            background-color: #fefefe;
+            background-color: #303030;
             margin: auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 20%;
+            width: auto;
         }
 
         .history-table {
 
         }
 
-        .history-table > td > button{
+        .history-table.td, td.button{
             width: 100%;
+            padding: 10px;
         }
 
         /* The Close Button */
@@ -147,12 +145,22 @@
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #eaeaea;
+        .operator {
+            color: #fff;
+            background-color: #404040;
         }
 
-        .operator {
-            color: #337cac;
+        .return {
+            background-color: #404040;
+            border-color: #b0353a;
+            color: #fff;
+        }
+
+        .equal-sign {
+            background-color: #bf1a73;
+            border-color: #337cac;
+            color: #fff;
+            height: 100%;
         }
 
         .all-clear {
@@ -161,118 +169,162 @@
             color: #fff;
         }
 
-        .all-clear:hover {
-            background-color: #f17377;
-        }
-
-        .equal-sign:hover {
-            background-color: #4e9ed4;
-        }
-
-        .calculator-keys {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .equal-sign {
-            background-color: #2e86c0;
-            border-color: #337cac;
-            color: #fff;
-            height: 100%;
-        }
-
         .history-buttons {
             display: grid;
             grid-template-columns: repeat(2, 2fr);
         }
 
         .btn-show {
-            background-color: #2e86c0;
+            padding: 10px;
+            background-color: #6e6e6e;
             border-color: #337cac;
             color: #fff;
             width: 200px;
+            height: 70px;
         }
 
         .btn-delete {
+            padding: 10px;
             background-color: #f0595f;
             border-color: #b0353a;
             color: #fff;
             width: 200px;
+            height: 70px;
         }
 
-        footer {
-
-            position: absolute;
-            bottom:10%;
-            left: 40%;
-            right:40%;
+        .btn-history-item {
+            background-color: #252525;
+            border-radius: 5px;
+            padding: 10px;
         }
 
-        h1 {
-            position: absolute;
-            top:10%;
-            left: 40%;
-            right:40%;
+        .btn-delete:hover {
+            background-color: #f17377;
         }
+
+        .all-clear:hover {
+            background-color: #f17377;
+        }
+
+        .equal-sign:hover {
+            background-color: #6d163b;
+        }
+
+        button:hover {
+            background-color: #404040;
+        }
+
+        .operator:hover, .return:hover{
+            background-color: #a68d37;
+        }
+
+        .calculator-keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            border: 1px solid black;
+        }
+
+        .footer {
+            padding: 20px;
+            font-size: 1.5rem;
+            background-color: #252525;
+
+        }
+
+        a, a:visited {
+            text-decoration: none;
+            color: #bf1a73;
+            text-shadow: 0 1px #252525;
+        }
+
+        .title{
+            padding: 20px;
+            background-color: #252525;
+            border-bottom: 1px solid #bf1a73;
+            text-shadow: 0 1px #303030;
+        }
+
     </style>
 </head>
 <body>
 
-<center>
-    <h1>Calculatrice CPOA </h1>
-</center>
+
 
 <div style="display: none">
     <p id="errors">${errors}</p>
     <p id="result">${expression.res}</p>
-    <form:form action="deleteAll" method="get">test</form:form>
+    <form:form action="deleteAll" modelAttribute="expressions" method="POST"></form:form>
 </div>
 
+
 <div class="calculator">
-    <form:form action="calculate" method="POST" modelAttribute="expression">
-        <form:input id="expression" path="exp" class="calculator-screen" />
-    </form:form>
+    <div class="title">
+        <center>
+            <a href="/calculatrice"><h1>Calculatrice CPOA </h1></a>
+        </center>
+        <span class="div-span"></span>
+    </div>
     <div id="calculate-res">
 
     </div>
+    <form:form action="calculate" method="POST" modelAttribute="expression">
+        <form:input id="expression" path="exp" class="calculator-screen" />
+    </form:form>
 
     <div class="calculator-keys">
 
-        <button class="btn-value" type="button " class="operator" value="+">+</button>
-        <button class="btn-value" type="button " class="operator" value="-">-</button>
-        <button class="btn-value" type="button " class="operator" value="*">&times;</button>
-        <button class="btn-value" type="button " class="operator" value="/">&divide;</button>
+        <button onclick="clearForm()" type="button" class="all-clear" value="all-clear">AC</button>
+        <button class="btn-value operator" type="button " value="(">(</button>
+        <button class="btn-value operator" type="button " value=")">)</button>
+        <button onclick="removeOne()" type="button" class="return"><=</button>
 
-        <button class="btn-value" type="button " value="(">(</button>
+
         <button class="btn-value" type="button " value="7">7</button>
         <button class="btn-value" type="button " value="8">8</button>
         <button class="btn-value" type="button " value="9">9</button>
+        <button class="btn-value operator" type="button " value="/">&divide;</button>
 
-        <button class="btn-value" type="button " value=")">)</button>
         <button class="btn-value" type="button " value="4">4</button>
         <button class="btn-value" type="button " value="5">5</button>
         <button class="btn-value" type="button " value="6">6</button>
+        <button class="btn-value operator" type="button " value="*">&times;</button>
 
-        <button onclick="clearForm()" type="button" class="all-clear" value="all-clear">AC</button>
         <button class="btn-value" type="button " value="1">1</button>
         <button class="btn-value" type="button " value="2">2</button>
         <button class="btn-value" type="button " value="3">3</button>
+        <button class="btn-value operator" type="button " value="-">-</button>
 
 
-        <button onclick="submitForm()" type="button" class="equal-sign" value="=">=</button>
-        <button type="button " class="decimal" value="." disabled></button>
+        <button class="btn-value" type="button " class="decimal" value=".">.</button>
         <button class="btn-value" type="button " value="0">0</button>
-
-
-
-        <button onclick="removeOne()" type="button" class="equal-sign"><=</button>
+        <button onclick="submitForm()" type="button" class="equal-sign" value="=">=</button>
+        <button class="btn-value operator" type="button "  value="+">+</button>
 
     </div>
-    <br/>
     <div class="history-buttons">
         <button class="btn-show">Afficher historique</button>
-        <button class="btn-delete" onclick="deleteAll()">supprimer historique</button>
+        <button class="btn-delete" onclick="deleteAll()">Supprimer historique</button>
     </div>
+    <div class="footer">
+        <center>
+            <p>2021 - by
+                <a href="https://www.linkedin.com/in/quentinkaczmarek" target="_blank">Quentin KACZMAREK </a>
+                and
+                <a href="https://www.linkedin.com/in/florian-tramoy" target="_blank">Florian TRAMOY</a>
+            </p>
+            <br/>
+            <p>
+                Find the repository for this project @ <a href="https://github.com/Night4dead/CPOA_CALCULATRICE/releases" target="_blank">Github</a>
+            </p>
+        </center>
+    </div>
+</div>
+
+<div>
+    <footer>
+
+    </footer>
 </div>
 
 <div id="modal-history" class="history">
@@ -285,20 +337,22 @@
                 </tr>
                 <c:forEach items="${expressions}" var="expressionItem">
                     <tr>
-                        <td><button class="btn-history-item">${expressionItem.exp}</button></td>
+                        <td>
+                            <center>
+                                <button class="btn-history-item">${expressionItem.exp}</button>  =  <button class="btn-history-item">${expressionItem.res}</button>
+                            </center>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
     </center>
 </div>
-<footer>
-    <p>2021 - by Quentin KACZMAREK and Florian TRAMOY</p>
-</footer>
+
 <script>
     window.onload = function (){
         if (checkErrors()){
-            document.getElementById("calculate-res").innerHTML = `<p id="errors-p" class="calculator-screen-errors"></p>`;
+            loadErrors();
             document.getElementById("errors-p").innerHTML = document.getElementById('errors').innerHTML;
         } else {
             document.getElementById("calculate-res").innerHTML = `<p id="result-p" class="calculator-screen-result"></p>`;
@@ -314,9 +368,12 @@
         modal.style.display = "none";
     });
 
+    function loadErrors(){
+        document.getElementById("calculate-res").innerHTML = `<p id="errors-p" class="calculator-screen-errors"></p>`;
+    }
+
 
     function deleteAll(){
-        console.log("hello " + document.forms[0].innerHTML);
         document.forms[0].submit();
     }
 
@@ -343,7 +400,8 @@
     }
 
     function checkErrors(){
-        if (document.getElementById('errors').innerHTML==""){
+        if (document.getElementById('errors').innerHTML==""
+            && document.getElementById('errors-p') == null){
             return false;
         }
         return true;
@@ -353,6 +411,7 @@
         if (validateCalculator()){
             document.forms[1].submit();
         } else {
+            loadErrors();
             document.getElementById("errors-p").innerHTML = 'Veuillez entrez une expression';
         }
     }
@@ -373,13 +432,14 @@
     })
 
     async function clearForm(){
-        document.forms[1].elements.namedItem("expression").value = "";
-        if(!checkErrors()){
-            document.getElementById("result").innerHTML ="";
-            document.getElementById("result-p").innerHTML = "";
-        }
-        document.getElementById("errors").innerHTML ="";
-        document.getElementById("errors-p").innerHTML = "";
+            document.forms[1].elements.namedItem("expression").value = "";
+            if (!checkErrors()) {
+                document.getElementById("result").innerHTML = "";
+                document.getElementById("result-p").innerHTML = "";
+            } else {
+                document.getElementById("errors").innerHTML ="";
+                document.getElementById("errors-p").innerHTML = "";
+            }
     }
 </script>
 </body>

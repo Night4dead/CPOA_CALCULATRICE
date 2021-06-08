@@ -13,28 +13,28 @@ public class Calculer {
     public double addition(String expression,int signe){
         String left = getLeftElement(expression, signe);
         String right = getRightElement(expression, signe);
-        return maths.addition(Integer.valueOf(left),Integer.valueOf(right));
+        return maths.addition(Double.valueOf(left),Double.valueOf(right));
     }
 
 
     public double soustraction(String expression,int signe){
         String left = getLeftElement(expression, signe);
         String right = getRightElement(expression, signe);
-        return maths.soustraction(Integer.valueOf(left),Integer.valueOf(right));
+        return maths.soustraction(Double.valueOf(left),Double.valueOf(right));
     }
 
 
     public double multiplication(String expression, int signe){
         String left = getLeftElement(expression, signe);
         String right = getRightElement(expression, signe);
-        return maths.multiplication(Integer.valueOf(left),Integer.valueOf(right));
+        return maths.multiplication(Double.valueOf(left),Double.valueOf(right));
     }
 
 
     public double division(String expression,int signe) throws Exception{
         String left = getLeftElement(expression, signe);
         String right = getRightElement(expression, signe);
-        return maths.division(Integer.valueOf(left),Integer.valueOf(right));
+        return maths.division(Double.valueOf(left),Double.valueOf(right));
     }
 
 

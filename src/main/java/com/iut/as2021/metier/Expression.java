@@ -8,6 +8,7 @@ import static com.iut.as2021.enums.Operation.INCONNUE;
 
 import com.iut.as2021.enums.Operation;
 import com.iut.as2021.exceptions.MathsExceptions;
+import com.iut.as2021.exceptions.MathsTechnicalException;
 import com.iut.as2021.interfaces.IMaths;
 import com.iut.as2021.mathematics.Maths;
 import com.iut.as2021.tools.Tools;
@@ -27,16 +28,16 @@ public class Expression {
     public double getValue() throws MathsExceptions {
         double res=0;
         if (this.ope==INCONNUE){
-            res = Integer.parseInt(this.expression);
+            try {
+                res = Double.parseDouble(this.expression);
+            } catch (Exception e){
+                throw new MathsTechnicalException("Erreur de format de l'expression");
+            }
         } else {
             res = this.calculate();
         }
         return res;
     }
-
-    public Expression(){
-    }
-
 
     public Expression(String exp) throws MathsExceptions{
         if (exp == null || exp.isEmpty()){

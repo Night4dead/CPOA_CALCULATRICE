@@ -53,6 +53,7 @@ public class Tools {
     private boolean hasUnauthorizedChar(int iCurrent, String expression){
         return isNotADigit(iCurrent,expression)
                 &&expression.charAt(iCurrent)!=' '
+                &&expression.charAt(iCurrent)!='.'
                 &&!isOperator(expression.charAt(iCurrent))
                 &&!isClosingParentheses(iCurrent,expression)
                 &&!isOpenParentheses(iCurrent,expression);
