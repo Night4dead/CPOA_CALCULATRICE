@@ -321,4 +321,175 @@ public class ExpressionTest {
         resultat = new Expression("((((((2 + 3)) * ((4 + 5)) + 2))) + 3 )* 2");
         Assert.assertEquals(resultat.getValue(), 100, 0);
     }
+        @Test
+    public void testExpressionSimpleAdditionDoubleWithoutP() throws MathsExceptions {
+        resultat = new Expression("3.5 + 4.5 + 5.5 + 6.5");
+        Assert.assertEquals(resultat.getValue(), 20, 2);
+    }
+    @Test
+    public void testExpressionSimpleAdditionDoubleWithNegative() throws MathsExceptions {
+        resultat = new Expression("-4.5+5.5+6.5");
+        Assert.assertEquals(resultat.getValue(), 7.5, 2);
+    }
+    @Test
+    public void testExpressionSimpleAdditionDoubleWithOneP() throws MathsExceptions {
+        resultat = new Expression("(3.5+4.5)+5.5+6.5");
+        Assert.assertEquals(resultat.getValue(), 20, 2);
+    }
+    @Test
+    public void testExpressionSimpleAdditionDoubleWithTwoP() throws MathsExceptions {
+        resultat = new Expression("(3.5+4.5)+(5.5+6.5)");
+        Assert.assertEquals(resultat.getValue(), 20, 2);
+    }
+    @Test
+    public void testExpressionSimpleSoustractionDoubleWithoutP() throws MathsExceptions {
+        resultat = new Expression("1.5+2.5-3.5+3.5");
+        Assert.assertEquals(resultat.getValue(), 4, 2);
+    }
+    @Test
+    public void testExpressionSimpleSoustractionDoubleWithOneP() throws MathsExceptions {
+        resultat = new Expression("(1.5+2.5)-3.5+3.5");
+        Assert.assertEquals(resultat.getValue(), 4, 2);
+    }
+    @Test
+    public void testExpressionSimpleSoustractionDoubleWithTwoP() throws MathsExceptions {
+        resultat = new Expression("(1.5+2.5)-(3.5+3.5)");
+        Assert.assertEquals(resultat.getValue(), -3, 2);
+    }
+    @Test
+    public void testExpressionSimpleSoustractionDoubleWithOnePRight() throws MathsExceptions {
+        resultat = new Expression("1.5+2.5-(3.5+3.5)");
+        Assert.assertEquals(resultat.getValue(), -3, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDouble() throws MathsExceptions {
+        resultat = new Expression("7.5*3.5");
+        Assert.assertEquals(resultat.getValue(), 26.25, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoublePriorityAdd() throws MathsExceptions {
+        resultat = new Expression("7.5*3.5+1.5");
+        Assert.assertEquals(resultat.getValue(), 27.75, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoubleWithP() throws MathsExceptions {
+        resultat = new Expression("(7.5*3.5)*5.5");
+        Assert.assertEquals(resultat.getValue(), 144.375, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoubleWithPWithoutOpe() throws MathsExceptions {
+        resultat = new Expression("(7.5*3.5)(5.5+1.5)");
+        Assert.assertEquals(resultat.getValue(), 183.75, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoubleWithPWithoutOpe2() throws MathsExceptions {
+        resultat = new Expression("(7.5*3.5)(5.5+1.5)*5.5");
+        Assert.assertEquals(resultat.getValue(), 1010.625, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoubleWithPWithoutOpe3() throws MathsExceptions {
+        resultat = new Expression("(7.5*3.5)(5.5+1.5)(1.5+2.5)");
+        Assert.assertEquals(resultat.getValue(), 735, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoubleWithPWithoutOpe4() throws MathsExceptions {
+        resultat = new Expression("(7.5*3.5)((5.5+1.5)(1.5+1.5))");
+        Assert.assertEquals(resultat.getValue(), 551.25, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoubleWithTwoP() throws MathsExceptions {
+        resultat = new Expression("(7.5+1.5)*(3.5+1.5)");
+        Assert.assertEquals(resultat.getValue(), 45, 2);
+    }
+    @Test
+    public void testExpressionSimpleMultiplicationDoublePriority() throws MathsExceptions {
+        resultat = new Expression("(7.5+1.5)*(2.5*3.5+1.5)");
+        Assert.assertEquals(resultat.getValue(), 92.25, 2);
+    }
+
+    @Test
+    public void testExpressionSimpleDivisionDouble() throws MathsExceptions {
+        resultat = new Expression("8.2/2.5");
+        Assert.assertEquals(resultat.getValue(), 3.28, 2);
+    }@Test
+    public void testExpressionSimpleDivisionDoubleWithOneP() throws MathsExceptions {
+        resultat = new Expression("8.5/(2.5+2.5)");
+        Assert.assertEquals(resultat.getValue(), 1.7, 2);
+    }@Test
+    public void testExpressionSimpleDivisionDoubleWithTwoP() throws MathsExceptions {
+        resultat = new Expression("(8.5+2.5)/(0.4+0.6)");
+        Assert.assertEquals(resultat.getValue(), 11, 2);
+    }
+
+    @Test
+    public void testExpressionComplexeDoubleFull() throws MathsExceptions {
+        resultat = new Expression("((6.5+3.5)+(4.5+5.5-2.5))/1.5");
+        Assert.assertEquals(resultat.getValue(),11.6666666667,2);
+    }
+    @Test
+    public void testExpressionComplexeDoubleFull2() throws MathsExceptions {
+        resultat = new Expression("(-1.5+2.5)-(1.5*3.5)*(3.5+1.5)");
+        Assert.assertEquals(resultat.getValue(),-25.25,2);
+    }
+    @Test
+    public void testExpressionComplexeDoubleFull3() throws MathsExceptions {
+        resultat = new Expression("(5.5+(2.1*1.1)+(3.1*1.1))/((5.1*2.1)-(2.5+3.5))");
+        Assert.assertEquals(resultat.getValue(),2.3821656051,2);
+    }
+    @Test
+    public void testExpressionComplexeDoubleFull4() throws MathsExceptions {
+        resultat = new Expression("(((((6.5+3.5)+(4.5+5.5-2.5))/1.5)))");
+        Assert.assertEquals(resultat.getValue(),11.6666666667,2);
+    }
+    @Test
+    public void testExpressionComplexeDoubleFull5() throws MathsExceptions {
+        resultat = new Expression("((6.5+3.5)+(((4.5+5.5-2.5))))/(1.5)");
+        Assert.assertEquals(resultat.getValue(),11.6666666667,2);
+    }
+    @Test
+    public void testExpressionComplexeDoubleFull6() throws MathsExceptions {
+        resultat = new Expression("(((((6.5+3.5))))+(4.5+5.5-2.5))/1.5");
+        Assert.assertEquals(resultat.getValue(),11.6666666667,2);
+    }
+
+    @Test
+    public void testExpressionAdditionDoubleNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("a+2.3");
+    }
+    @Test
+    public void testExpressionMultiplicationDoubleNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("ba*2.1");
+    }
+    @Test
+    public void testExpressionSoustractionDoubleNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("e-1.4");
+    }
+    @Test
+    public void testExpressionDivisionDoubleNotaNumber() throws MathsExceptions{
+        e.expect(MathsExceptions.class);
+        e.expectMessage("l'expression contient des caractères non-autorisés");
+        resultat = new Expression("!/6.8");
+    }
+
+    @Test
+    public void testExpressionComplexDoubleWithSeveralBrackets() throws MathsExceptions {
+        resultat = new Expression("(((((2.3 + 3.4)) * ((4.5 + 5.7)) + 2.1)))");
+        Assert.assertEquals(resultat.getValue(), 60.23999999999999, 0);
+    }
+    @Test
+    public void testExpressionComplexDoubleWithSeveralBrackets2() throws MathsExceptions {
+        resultat = new Expression("(((((2.1 + 3.2)) * ((4.3 + 5.4)) + 2.5))) + 3.6 * 2.7");
+        Assert.assertEquals(resultat.getValue(), 63.63, 0);
+    }
+    @Test
+    public void testExpressionComplexDoubleWithSeveralBrackets3() throws MathsExceptions {
+        resultat = new Expression("((((((2.1 + 3.2)) * ((4.3 + 5.4)) + 2.5))) + 3.6 )* 2.7");
+        Assert.assertEquals(resultat.getValue(), 155.27700000000002, 0);
+    }
 }
