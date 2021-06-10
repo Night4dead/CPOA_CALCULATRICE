@@ -40,9 +40,7 @@ public class ActionCalculate {
     @GetMapping("/")
     public String formCalculate(Locale locale, Model model){
         try {
-            model.addAttribute("message","Welcome !");
-            model.addAttribute("expression",initCalculatrice());
-            model.addAttribute("expressions",manager.getExpressions());
+            reinitModel(model);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
@@ -52,7 +50,6 @@ public class ActionCalculate {
     @PostMapping("/calculate")
     public String calculateExpression(@ModelAttribute("expression") @Valid BoExpression expression, Model model){
         try{
-            logger.info("l'expression est : "+expression.getExp());
             expression.setRes(manager.calculer(expression.getExp()));
             manager.saveExpression(expression);
             model.addAttribute("expressions",manager.getExpressions());

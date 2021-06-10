@@ -22,10 +22,9 @@ public class CalculatriceManager {
     private IServiceExpression serviceExpression;
 
     public String calculer(String expression) throws MathsExceptions {
-        logger.info("--> calcul de l'expression : "+expression);
         try{
             result = serviceExpression.calculate(expression);
-            logger.info("Manager: result: "+result);
+            logger.info(expression+" = "+result);
             return result;
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -34,7 +33,6 @@ public class CalculatriceManager {
     }
 
     public void saveExpression(BoExpression expression) throws MathsExceptions {
-        logger.info("-> demande de sauvegarde de l'expression au service");
         try {
             serviceExpression.save(expression);
         } catch (Exception e){
@@ -52,7 +50,6 @@ public class CalculatriceManager {
     }
 
     public List<BoExpression> getExpressions() throws MathsExceptions {
-        logger.info("-> liste des expressions");
         try {
             return serviceExpression.expressionList();
         } catch (Exception e){

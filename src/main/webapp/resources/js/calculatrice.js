@@ -62,8 +62,8 @@ function submitForm(){
     if (validateCalculator()){
         document.forms[1].submit();
     } else {
-        loadErrors();
-        document.getElementById("errors-p").innerHTML = 'Veuillez entrez une expression';
+        //loadErrors();
+        //document.getElementById("errors-p").innerHTML = 'Veuillez entrez une expression';
     }
 }
 

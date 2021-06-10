@@ -103,7 +103,9 @@
                     <tr>
                         <td>
                             <center>
-                                <button class="btn-history-item" value="${expressionItem.exp}">${expressionItem.exp}</button>  =  <button class="btn-history-item btn-history-item-res" value="${expressionItem.res}">${expressionItem.res}</button>
+                                <button class="btn-history-item" value="${expressionItem.exp}">${expressionItem.exp}</button>
+                                =
+                                <button class="btn-history-item btn-history-item-res" value="${expressionItem.res}">${expressionItem.res}</button>
                             </center>
                         </td>
                     </tr>
