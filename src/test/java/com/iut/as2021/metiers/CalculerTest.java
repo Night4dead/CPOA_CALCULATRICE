@@ -98,7 +98,6 @@ public class CalculerTest {
     public void testDivision() throws Exception {
         Assert.assertEquals(maths.division("2/2",1),1,2);
     }
-   
     @Test
     public void testDivision2() throws Exception {
         Assert.assertEquals(maths.division("2/1",1),2,2);
@@ -125,11 +124,12 @@ public class CalculerTest {
         e.expectMessage("Division par zero impossible");
         maths.division("2/0",1);
     }
+
     @Test
-    public void testAdditionDouble() { Assert.assertEquals(maths.addition("2.3+5.4",1),7.7,2); }
+    public void testAdditionDouble() { Assert.assertEquals(maths.addition("2.3+5.4",3),7.7,2); }
     @Test
     public void testAdditionDouble2() {
-        Assert.assertEquals(maths.addition("1.2+2",1),3.2,2);
+        Assert.assertEquals(maths.addition("1.2+2",3),3.2,2);
     }
     @Test
     public void testAdditionDouble3() {
@@ -137,7 +137,7 @@ public class CalculerTest {
     }
     @Test
     public void testAdditionDouble4() {
-        Assert.assertEquals(maths.addition("-2.5+5",2),2.5,2);
+        Assert.assertEquals(maths.addition("-2.5+5",4),2.5,2);
     }
     @Test
     public void testAdditionDouble5() {
@@ -146,7 +146,7 @@ public class CalculerTest {
 
     @Test
     public void testSoustractionDouble(){
-        Assert.assertEquals(maths.soustraction("1.5-2",1),-0.5,2);
+        Assert.assertEquals(maths.soustraction("1.5-2",3),-0.5,2);
     }
     @Test
     public void testSoustractionDouble2(){
@@ -154,7 +154,7 @@ public class CalculerTest {
     }
     @Test
     public void testSoustractionDouble3(){
-        Assert.assertEquals(maths.soustraction("-2.5-2.3",2),-4.8,2);
+        Assert.assertEquals(maths.soustraction("-2.5-2.3",4),-4.8,2);
     }
     @Test
     public void testSoustractionDouble4(){
@@ -162,26 +162,26 @@ public class CalculerTest {
     }
     @Test
     public void testSoustractionDouble5(){
-        Assert.assertEquals(maths.soustraction("-32.3--2",2),34.3,2);
+        Assert.assertEquals(maths.soustraction("-32.3--2",5),-30.3,2);
     }
     @Test
     public void testSoustractionDouble6(){
-        Assert.assertEquals(maths.soustraction("-32.3--2.4",2),34.7,2);
+        Assert.assertEquals(maths.soustraction("-32.3--2.4",5),-29.9,2);
     }
 
     @Test
-    public void testMultiplicationDouble(){ Assert.assertEquals(maths.multiplication("1.5*2",1),3,2); }
+    public void testMultiplicationDouble(){ Assert.assertEquals(maths.multiplication("1.5*2",3),3,2); }
     @Test
     public void testMultiplicationDouble2(){
         Assert.assertEquals(maths.multiplication("2*2.5",1),5,2);
     }
     @Test
     public void testMultiplicationDouble3(){
-        Assert.assertEquals(maths.multiplication("1.5*1.5",2),2.25,2);
+        Assert.assertEquals(maths.multiplication("1.5*1.5",3),2.25,2);
     }
     @Test
     public void testMultiplicationDouble4(){
-        Assert.assertEquals(maths.multiplication("-10*2.5",2),-25,2);
+        Assert.assertEquals(maths.multiplication("-10*2.5",3),-25,2);
     }
     @Test
     public void testMultiplicationDouble5(){
@@ -189,7 +189,7 @@ public class CalculerTest {
     }
     @Test
     public void testMultiplicationDouble6(){
-        Assert.assertEquals(maths.multiplication("-10.5*-2.5",2),26.25,2);
+        Assert.assertEquals(maths.multiplication("-10.5*-2.5",5),26.25,2);
     }
     @Test
     public void testMultiplicationDouble7(){
@@ -198,7 +198,7 @@ public class CalculerTest {
 
     @Test
     public void testDivisionDouble() throws Exception {
-        Assert.assertEquals(maths.division("2.5/2",1),1.25,2);
+        Assert.assertEquals(maths.division("2.5/2",3),1.25,2);
     }
     @Test
     public void testDivisionDouble2() throws Exception {
@@ -206,15 +206,15 @@ public class CalculerTest {
     }
     @Test
     public void testDivisionDouble3() throws Exception {
-        Assert.assertEquals(maths.division("1.5/2.5",1),0.6,2);
+        Assert.assertEquals(maths.division("1.5/2.5",3),0.6,2);
     }
     @Test
     public void testDivisionDouble4() throws Exception {
-        Assert.assertEquals(maths.division("-2.5/2",2),-1.25,2);
+        Assert.assertEquals(maths.division("-2.5/2",4),-1.25,2);
     }
     @Test
     public void testDivisionDouble5() throws Exception {
-        Assert.assertEquals(maths.division("-1.5/-2.5",1),0.6,2);
+        Assert.assertEquals(maths.division("-1.5/-2.5",4),0.6,2);
     }
     @Test
     public void testDivisionDouble6() throws Exception {
@@ -222,12 +222,13 @@ public class CalculerTest {
     }
     @Test
     public void testDivisionDouble7() throws Exception {
-        Assert.assertEquals(maths.division("-2/-1.6",1),1.25,2);
+        Assert.assertEquals(maths.division("-2/-1.6",2),1.25,2);
     }
     @Test
     public void testDivisionDoubleException() throws Exception {
         e.expect(MathsExceptions.class);
         e.expectMessage("Division par zero impossible");
-        maths.division("2.5/0",1);
+        maths.division("2.5/0",3);
     }
+
 }
