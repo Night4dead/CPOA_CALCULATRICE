@@ -1,3 +1,6 @@
+/**
+ * Au chargement de la page, charge les erreurs s'il y en as, sinon charge le résultat s'il y en as un
+ * */
 window.onload = function (){
     if (checkErrors()){
         loadErrors();
@@ -13,22 +16,31 @@ window.onload = function (){
 
 }
 
-
+/**
+ * Permet de charger une expression passé ou son résultat dans le input de la calculatrice
+ * */
 $(".btn-history-item").click(function(){
     document.forms[1].elements.namedItem("expression").value = this.value;
     modal.style.display = "none";
 });
 
+/**
+ * charge le display des erreurs
+ * */
 function loadErrors(){
     document.getElementById("calculate-res").innerHTML = `<p id="errors-p" class="calculator-screen-errors"></p>`;
 }
 
-
+/**
+ * Supprime l'historique
+ * */
 function deleteAll(){
     document.forms[0].submit();
 }
 
-
+/**
+ * Partie faisant fonctionner le modal de l'historique
+ * */
 let modal = document.getElementById("modal-history");
 let modal_btn = document.getElementsByClassName("btn-show")[0];
 let modal_close = document.getElementsByClassName("close")[0];
@@ -50,6 +62,9 @@ window.onclick = function(event) {
     }
 }
 
+/**
+ * Vérifie la présence d'erreurs
+ * */
 function checkErrors(){
     if (document.getElementById('errors').innerHTML==""
         && document.getElementById('errors-p') == null){
@@ -58,19 +73,25 @@ function checkErrors(){
     return true;
 }
 
+/**
+ * Réalise le calcul de l'expression si elle n'est pas vide
+ * */
 function submitForm(){
     if (validateCalculator()){
         document.forms[1].submit();
-    } else {
-        //loadErrors();
-        //document.getElementById("errors-p").innerHTML = 'Veuillez entrez une expression';
     }
 }
 
+/**
+ * bouton backspace pour le input
+ * */
 function removeOne(){
     document.forms[1].elements.namedItem("expression").value = document.forms[1].elements.namedItem("expression").value.substring(0,document.forms[1].elements.namedItem("expression").value.length-1);
 }
 
+/**
+ * Vérifie qu'une expression est bien écrit dans le input
+ * */
 function validateCalculator(){
     if (document.forms[1].elements.namedItem("expression").value == ""){
         return false;
@@ -78,10 +99,16 @@ function validateCalculator(){
     return true;
 }
 
+/**
+ * Listener pour les boutons digit de la calculatrice, ajoute la value du bouton au input
+ * */
 $('.btn-value').click(function (){
     document.forms[1].elements.namedItem("expression").value += this.value;
 })
 
+/**
+ * vide tout les champs de la calculatrice
+ * */
 async function clearForm(){
     document.forms[1].elements.namedItem("expression").value = "";
     if (!checkErrors()) {

@@ -5,6 +5,10 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Entité de db avec hibernate, représentant une expression
+ * */
+
 @Entity
 @Data
 @Table(name = "historique")

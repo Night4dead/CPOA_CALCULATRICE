@@ -43,6 +43,10 @@ public class ServiceExpressionImp implements IServiceExpression {
         this.dto = dtoManager;
     }
 
+
+    /**
+     * Calcul une expression, le decimalFormat est utilisé pour empecher l'affichage d'un résultat en notation scientifique
+     * */
     @Override
     public String calculate(String expression) throws MathsExceptions {
         logger.info("************* Calcul de l'expression : "+ expression);
@@ -51,6 +55,10 @@ public class ServiceExpressionImp implements IServiceExpression {
         return df.format((new Expression(expression)).getValue());
     }
 
+
+    /**
+     * Sauvegarde d'une expression dans la db
+     * */
     @Override
     public void save(BoExpression expression) throws MathsExceptions {
         logger.info("************* Sauvegarde de l'expression");
@@ -62,6 +70,10 @@ public class ServiceExpressionImp implements IServiceExpression {
         }
     }
 
+
+    /**
+     * Supprime toute les expressions de la db
+     * */
     @Override
     public void deleteAll(List<BoExpression> expressionList) throws MathsExceptions {
         logger.info("*********** Suppressions des expressions");
@@ -70,6 +82,10 @@ public class ServiceExpressionImp implements IServiceExpression {
         }
     }
 
+
+    /**
+     * Récupère toute les expressions dans la db
+     * */
     @Override
     public List<BoExpression> expressionList() throws MathsExceptions {
         List<BoExpression> expressionList = new ArrayList<>();

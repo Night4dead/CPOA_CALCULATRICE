@@ -25,6 +25,10 @@ public class Expression {
     private Expression leftExpression;
     private Expression rightExpression;
 
+
+    /**
+     * Renvois le résultat du calcul d'une expression
+     * */
     public double getValue() throws MathsExceptions {
         double res=0;
         if (this.ope==INCONNUE){
@@ -39,6 +43,9 @@ public class Expression {
         return res;
     }
 
+    /**
+     * Constructeur expression, va stocker l'expression ainsi que la décomposer en deux membres distincts
+     * */
     public Expression(String exp) throws MathsExceptions{
         if (exp == null || exp.isEmpty()){
             throw new MathsExceptions("l'expression est vide");
@@ -53,6 +60,10 @@ public class Expression {
         maths = new Maths();
     }
 
+
+    /**
+     * Décomposition de l'expression en deux membres selon la position de l'opérateur ayant la plus petite priorité de calcul
+     * */
     private void assignLeftRightExpressions()throws MathsExceptions{
         int pos = getPosition();
         if(!INCONNUE.equals(ope)){
@@ -67,6 +78,9 @@ public class Expression {
         }
     }
 
+    /**
+     * Récupère la position de l'opérateur avec la plus petite priorité de calcul
+     * */
     private int getPosition(){
         int pos=0,count=0;
         for(int i=this.expression.length()-1;i>-1;i--){
@@ -90,24 +104,36 @@ public class Expression {
         return pos;
     }
 
+    /**
+     * Test la présence d'un signe - indiquant un nombre négatif
+     * */
     private boolean isNegativeNumber(int iCurrent){
         return this.expression.charAt(iCurrent)=='-' &&
                 (tools.isOperator(this.expression.charAt(iCurrent-1)) ||
                         tools.isOpenParentheses(iCurrent-1,this.expression));
     }
 
+    /**
+     * Vérifie si l'opérateur détecter est le nouvel opérateur avec la plus petite priorité de calcul
+     * */
     private boolean isNewOperator(int iCurrent, int count, int pos){
         return tools.isOperator(this.expression.charAt(iCurrent)) &&
                 count==0 &&
                 ( pos==0 || this.ope==MULTIPLICATION || this.ope==DIVISION );
     }
 
+    /**
+     * Vérifie la présence d'une paranthèse ) indique une multiplication implicite --> (1+2)(3*2)
+     * */
     private boolean isImplicitMultiplication(int iCurrent, int iBefore){
         return iCurrent<this.expression.length()-2 &&
                 tools.isClosingParentheses(iCurrent,this.expression) &&
                 tools.isOpenParentheses(iBefore,this.expression);
     }
 
+    /**
+     * Détermine l'opérateur du char c
+     * */
     private void switchOpe(char c){
         switch(c){
             case '+':
@@ -125,6 +151,9 @@ public class Expression {
         }
     }
 
+    /**
+     * Calcul le résultat d'une expression
+     * */
     private double calculate() throws MathsExceptions{
         double res=0;
         switch (ope){

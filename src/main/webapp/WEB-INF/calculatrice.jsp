@@ -20,7 +20,7 @@
 <body>
 
 
-
+<!-- div cachée pour stocker des variables à traiter au loading de la page, plus le form permettant de supprimer l'historique-->
 <div style="display: none">
     <p id="errors">${errors}</p>
     <div id="result" data_res="${expression.res}">${expression.res}</div>
@@ -91,6 +91,7 @@
     </div>
 </div>
 
+<!-- historique de la calculatrice, en modal -->
 <div id="modal-history" class="history">
     <center>
         <div class="history-content">

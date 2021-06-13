@@ -3,6 +3,9 @@ package com.iut.as2021.modele;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * Business Object
+ * */
 public class BoExpression {
     private Integer id;
     
@@ -10,6 +13,9 @@ public class BoExpression {
     @NotEmpty(message = "Merci de rentrer une expression")
     private String exp;
 
+    /**
+     * Résultat d'une expression
+     * */
     private String res;
 
     public String getRes() {

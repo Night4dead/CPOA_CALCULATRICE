@@ -31,11 +31,20 @@ public class ActionCalculate {
     @ModelAttribute("expressions")
     public List<BoExpression> initHistory() throws MathsExceptions { return manager.getExpressions(); }
 
+
+    /**
+    *  Réinitialise le model, en récupérant l'historique de la DB et en mettant une nouvelle expression vide par défaut
+    *
+    * */
     private void reinitModel(Model model) throws MathsExceptions {
         model.addAttribute("expression", initCalculatrice());
         model.addAttribute("expressions", initHistory());
     }
 
+
+    /**
+    *  Retourne à l'acceuil de la page web (le site n'a qu'une page, il réinitialise donc juste l'interface)
+    * */
     @GetMapping("/")
     public String formCalculate(Locale locale, Model model){
         try {
@@ -46,6 +55,11 @@ public class ActionCalculate {
         return MAIN_PAGE;
     }
 
+    /**
+     *  Calcule une expression dans l'attribut de model 'expression'
+     *  sauvegarde cette expression dans la db
+     *  recharge la liste des expressions depuis la db
+     * */
     @PostMapping("/calculate")
     public String calculateExpression(@ModelAttribute("expression") @Valid BoExpression expression, Model model){
         try{
@@ -60,6 +74,10 @@ public class ActionCalculate {
         }
     }
 
+
+    /**
+     * Supprime l'historique
+     * */
     @PostMapping("/deleteAll")
     public String deleteAll(@ModelAttribute("expressions") @Valid List<BoExpression> expressions,Model model){
         logger.info("suppression des expressions");

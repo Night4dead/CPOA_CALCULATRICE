@@ -21,6 +21,10 @@ public class CalculatriceManager {
     @Autowired
     private IServiceExpression serviceExpression;
 
+
+    /**
+     * Calcule une expression
+     * */
     public String calculer(String expression) throws MathsExceptions {
         try{
             result = serviceExpression.calculate(expression);
@@ -32,6 +36,9 @@ public class CalculatriceManager {
         }
     }
 
+    /**
+     * Sauvegarde une expression
+     * */
     public void saveExpression(BoExpression expression) throws MathsExceptions {
         try {
             serviceExpression.save(expression);
@@ -40,6 +47,9 @@ public class CalculatriceManager {
         }
     }
 
+    /**
+     * Supprime toute les expressions
+     * */
     public void deleteAll(List<BoExpression> expressions) throws MathsExceptions {
         logger.info("-> suppressions des expressions");
         try {
@@ -49,6 +59,10 @@ public class CalculatriceManager {
         }
     }
 
+
+    /**
+     * Récupère tout l'historique des expressions de la db
+     * */
     public List<BoExpression> getExpressions() throws MathsExceptions {
         try {
             return serviceExpression.expressionList();

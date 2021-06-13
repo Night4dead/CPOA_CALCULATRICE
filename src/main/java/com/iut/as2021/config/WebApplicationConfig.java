@@ -32,8 +32,8 @@ public class WebApplicationConfig extends WebMvcConfigurerAdapter implements Web
         return resolver;
     }
 
-    /*
-     * Mise en place des répertoires de ressources - fichier de configuration et css
+    /**
+     * Mise en place des répertoires de ressources - fichier de configuration et css et js
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

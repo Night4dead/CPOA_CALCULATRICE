@@ -11,6 +11,10 @@ import java.text.DecimalFormat;
 
 @Component
 public class DtoExpression implements IDtoGeneric<BoExpression, EntityExpression> {
+
+    /**
+     * Convertis un objet entité de db en Business Object
+     * */
     @Override
     public BoExpression adapt(EntityExpression object) throws MathsExceptions {
         DecimalFormat df = new DecimalFormat("#");
@@ -32,6 +36,10 @@ public class DtoExpression implements IDtoGeneric<BoExpression, EntityExpression
         return expression;
     }
 
+
+    /**
+     * Convertit un Business Object en entité de db
+     * */
     @Override
     public EntityExpression unAdapt(BoExpression object) {
         EntityExpression entityExpression = new EntityExpression();
